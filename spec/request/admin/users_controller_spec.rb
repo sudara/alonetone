@@ -281,12 +281,12 @@ RSpec.describe Admin::UsersController, type: :request do
       end
 
       it 'should display users assets' do
-        expect(response.body).to match(/User's Tracks/)
+        expect(response.body).to match(/Tracks/)
         expect(response.body).to match(/Very good song/)
       end
 
       it 'should display users comments' do
-        expect(response.body).to match(/User's Comments/)
+        expect(response.body).to match(/Comments/)
         expect(response.body).to match(/this is an awesome track, says a user/)
       end
     end
@@ -301,7 +301,7 @@ RSpec.describe Admin::UsersController, type: :request do
       end
 
       it 'should display deleted at date' do
-        expect(response.body).to match(/Deleted/)
+        expect(response.body).to match(/deleted/i)
       end
 
       it 'should display user information' do

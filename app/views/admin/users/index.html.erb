@@ -1,35 +1,30 @@
+<% predefined = %w[invited is_spam spam_musicians deleted]
+   pills = [
+     { label: 'All', url: admin_users_path, active: params[:filter_by].blank? },
+     { label: 'Invited', url: admin_users_path(filter_by: 'invited'), active: params[:filter_by] == 'invited' },
+     { label: 'Spam', url: admin_users_path(filter_by: 'is_spam'), active: params[:filter_by] == 'is_spam' },
+     { label: 'Spam Musicians', url: admin_users_path(filter_by: 'spam_musicians'), active: params[:filter_by] == 'spam_musicians' },
+     { label: 'Deleted', url: admin_users_path(filter_by: 'deleted'), active: params[:filter_by] == 'deleted' }
+   ] %>
 
-<div id="admin_columns">
-  <div class="admin_column_left box">
-    <h2>Admin</h2>
-    <%= render partial: 'admin/navigation' %>
-  </div>
+<div class="space-y-4">
+  <%= render 'admin/shared/view_tabs', tabs: admin_user_view_tabs(:list) %>
 
-  <div class="admin_column_right">
-   <div class="admin_search_field">
-    <%= form_for 'filter_by', method: :get do |f| %>
-      <%= text_field_tag 'filter_by', nil, placeholder: 'Search by login or email' %>
-    <% end %>
-    </div>
-    <div class="mini_paginator top_paginator">
-      <%== pagy_nav @pagy %>
-    </div>
-    <div class="admin_column_right_inner box">
+  <%= form_with url: admin_users_path, method: :get, class: "flex gap-2" do |form| %>
+    <%= form.search_field :filter_by,
+          value: (params[:filter_by] unless predefined.include?(params[:filter_by])),
+          placeholder: "Search login, email, or display name…",
+          class: "w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-fg placeholder:text-fg-faint focus:border-accent focus:outline-none" %>
+    <%= form.submit "Search", class: "shrink-0 cursor-pointer rounded-lg bg-accent px-3 py-2 text-sm font-semibold text-accent-fg hover:bg-accent-hover" %>
+  <% end %>
 
-      <header class="admin_users_header">
-        <div class="date_column">Joined</div>
-        <div class="user_column">User</div>
-        <div class="bio_column">Bio</div>
-      </header>
+  <%= render 'admin/shared/filter_pills', pills: pills %>
 
-      <div class="admin_users_rows">
-         <%= render partial: 'admin/users/user', collection: @users %>
-      </div>
-    </div>
+  <% if @users.any? %>
+    <div class="space-y-3"><%= render partial: 'user', collection: @users %></div>
+  <% else %>
+    <p class="rounded-xl border border-border bg-surface-raised p-6 text-sm text-fg-muted">No users here.</p>
+  <% end %>
 
-    <div class="mini_paginator bottom_paginator">
-      <%== pagy_nav @pagy %>
-    </div>
-
-  </div>
+  <%= render 'admin/shared/pagination' %>
 </div>

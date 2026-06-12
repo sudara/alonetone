@@ -55,6 +55,7 @@ class User < ApplicationRecord
     c.crypto_provider = Authlogic::CryptoProviders::SCrypt
     c.disable_perishable_token_maintenance = true # we will handle tokens
     c.ignore_blank_passwords = false
+    c.raise_on_model_setup_error = true # else a DB blip at load time silently strips every Authlogic method for the process lifetime
   end
 
   scope :activated,     -> { where(perishable_token: nil).recent }
@@ -148,7 +149,7 @@ class User < ApplicationRecord
   has_one :mass_invite_signup
   has_one :mass_invite, through: :mass_invite_signup
 
-  has_one :patron
+  has_one :patron, dependent: :destroy
 
   # tokens and activation
   def clear_token!
@@ -307,7 +308,8 @@ class User < ApplicationRecord
     when "invited"
       joins(:mass_invite_signup).order('created_at DESC')
     when String
-      with_deleted.where("email like '%#{filter}%' or login like '%#{filter}%' or display_name like '%#{filter}%'").recent
+      term = "%#{sanitize_sql_like(filter)}%"
+      with_deleted.where('email LIKE :q OR login LIKE :q OR display_name LIKE :q', q: term).recent
     else
       with_deleted.recent
     end
@@ -381,5 +383,7 @@ end
 #
 # Indexes
 #
-#  index_users_on_updated_at  (updated_at)
+#  index_users_on_current_login_ip_and_deleted_at  (current_login_ip,deleted_at)
+#  index_users_on_deleted_at_and_created_at        (deleted_at,created_at)
+#  index_users_on_updated_at                       (updated_at)
 #

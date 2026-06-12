@@ -1,9 +1,26 @@
 module Admin
   class AssetsController < Admin::BaseController
-    before_action :find_asset, only: %i[spam unspam delete restore]
+    before_action :find_asset, only: %i[spam unspam delete restore purge]
+    before_action :admin_only, only: %i[purge]
 
     def index
-      @pagy, @assets = pagy(Asset.filter_by(permitted_params[:filter_by]))
+      @admin_title = 'Tracks'
+      @pagy, @assets = pagy(Asset.filter_by(permitted_params[:filter_by]).includes(possibly_deleted_user: %i[profile avatar_image_blob]))
+    end
+
+    def most_played
+      @admin_title = 'Most Played'
+      @admin_range_enabled = true
+      scope = admin_range ? Listen.where(created_at: admin_range) : Listen
+      @play_counts = scope.group(:asset_id).order('count_all DESC').limit(25).count
+      @assets_by_id = Asset.with_deleted.where(id: @play_counts.keys)
+        .includes(possibly_deleted_user: %i[profile avatar_image_blob]).index_by(&:id)
+    end
+
+    def all_time
+      @admin_title = 'All-Time Plays'
+      @assets = Asset.order(listens_count: :desc).limit(25)
+        .includes(possibly_deleted_user: %i[profile avatar_image_blob])
     end
 
     def unspam
@@ -24,6 +41,17 @@ module Admin
     def restore
       AssetCommand.new(@asset).restore_with_relations if @asset
       respond_with_asset_row(fallback_filter: :not_spam, notice: "\"#{@asset.title}\" has been restored.")
+    end
+
+    def purge
+      if @asset.perma_deletable?
+        title = @asset.title
+        AssetCommand.new(@asset).destroy_with_relations
+        flash[:ok] = "\"#{title}\" has been permanently deleted."
+      else
+        flash[:alert] = 'Only tracks soft-deleted more than 30 days ago can be permanently deleted.'
+      end
+      redirect_to admin_assets_path(filter_by: :deleted), status: :see_other
     end
 
     private
@@ -48,7 +76,7 @@ module Admin
     def asset_soft_deleted_location(fallback_filter)
       return admin_assets_path(filter_by: fallback_filter) if admin_row_request?
       return admin_assets_path(filter_by: fallback_filter) if request.referer.blank?
-      return admin_assets_path(filter_by: fallback_filter) if @asset.possibly_deleted_user.soft_deleted?
+      return admin_assets_path(filter_by: fallback_filter) if @asset.possibly_deleted_user.nil? || @asset.possibly_deleted_user.soft_deleted?
 
       user_home_path(@asset.possibly_deleted_user)
     end

@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'possibly_deleted_user/:id', :to => 'users#show', as: 'possibly_deleted_user'
 
+    get 'shared_ips', to: 'users#shared_ips'
+    get 'bandwidth', to: 'users#bandwidth'
+    get 'most_played', to: 'assets#most_played'
+    get 'all_time', to: 'assets#all_time'
+
     resources :account_requests, path: 'account_requests/(:filter_by)' do
       member do
         put :approve
@@ -20,6 +25,7 @@ Rails.application.routes.draw do
         put :unspam
         put :spam
         put :mark_all_users_with_ip_as_spam
+        delete :purge
       end
     end
     resources :comments, path: 'comments/(:filter_by)', only: [:index] do
@@ -34,9 +40,17 @@ Rails.application.routes.draw do
         put :spam
         put :delete
         put :restore
+        delete :purge
       end
     end
     resources :mass_invites, param: :token
+    resources :listens, only: [:index]
+    get 'listens/banned', to: 'listens#banned_ips', as: :banned_ips
+    post 'listens/ban', to: 'listens#ban', as: :ban_ip
+    delete 'listens/banned/:id', to: 'listens#unban', as: :banned_ip
+    post 'listens/banned/:id/purge', to: 'listens#purge_listens', as: :purge_banned_ip
+    get 'devops', to: 'devops#index', as: :devops
+    post 'devops/purge', to: 'devops#purge', as: :devops_purge
   end
 
   get '/get_an_account', :to => 'account_requests#new'
@@ -57,8 +71,7 @@ Rails.application.routes.draw do
   get '/unfollow/:login' => 'following#unfollow', as: :unfollow
 
   # admin stuff
-  get 'admin' => 'admin#index'
-  get 'secretz' => 'admin#secretz'
+  get 'admin' => 'admin/dashboard#index'
   put 'toggle_theme' => 'pages#toggle_theme'
 
   get '404', to: "pages#four_oh_four"

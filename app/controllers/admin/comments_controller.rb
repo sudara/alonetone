@@ -3,11 +3,10 @@ module Admin
     before_action :set_comment, only: %i[unspam spam]
 
     def index
-      if permitted_params[:filter_by]
-        @pagy, @comments = pagy(Comment.where(permitted_params[:filter_by]).recent)
-      else
-        @pagy, @comments = pagy(Comment.recent)
-      end
+      @admin_title = 'Comments'
+      scope = Comment.includes(:commenter).recent
+      scope = scope.where(permitted_params[:filter_by]) if permitted_params[:filter_by]
+      @pagy, @comments = pagy(scope)
     end
 
     def unspam

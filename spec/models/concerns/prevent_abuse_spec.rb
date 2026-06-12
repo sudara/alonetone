@@ -6,25 +6,29 @@ RSpec.describe PreventAbuse do
   let(:base) do
     Struct.new(:request) { include PreventAbuse }
   end
-  let(:fake_request) { Struct.new(:ip, :user_agent, keyword_init: true) }
+  let(:fake_request) { Struct.new(:remote_ip, :user_agent, keyword_init: true) }
 
   it "allows requests which appear to not be from a bot" do
     request = fake_request.new(
-      ip: '62.251.41.177',
+      remote_ip: '62.251.41.177',
       user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36"
     )
     controller = base.new(request)
     expect(controller.is_a_bot?).to be_falsey
   end
 
-  it "disallows bad IP address ranges" do
-    request = fake_request.new(ip: '121.14.1.1')
+  it "disallows banned IP address ranges" do
+    BannedIp.create!(ip: '121.14.0.0/16')
+    BannedIp.clear_cache
+    request = fake_request.new(remote_ip: '121.14.1.1')
     controller = base.new(request)
     expect(controller.is_from_a_bad_ip?).to be_truthy
   end
 
-  it "allows good IP address ranges" do
-    request = fake_request.new(ip: '62.251.41.177')
+  it "allows IPs outside any banned range" do
+    BannedIp.create!(ip: '121.14.0.0/16')
+    BannedIp.clear_cache
+    request = fake_request.new(remote_ip: '62.251.41.177')
     controller = base.new(request)
     expect(controller.is_from_a_bad_ip?).to be_falsey
   end
@@ -42,29 +46,31 @@ RSpec.describe PreventAbuse do
   end
 
   it "sees Yandex as a bot" do
-    request = fake_request.new(ip: '127.0.0.1', user_agent: "Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106")
+    request = fake_request.new(remote_ip: '127.0.0.1', user_agent: "Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106")
     controller = base.new(request)
     expect(controller.is_a_bot?).to be_truthy
   end
 
   it "sees Baidu as a bot" do
-    request = fake_request.new(ip: '127.0.0.1', user_agent: "Mozilla/5.0 (compatible; Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)")
+    request = fake_request.new(remote_ip: '127.0.0.1', user_agent: "Mozilla/5.0 (compatible; Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)")
     controller = base.new(request)
     expect(controller.is_a_bot?).to be_truthy
   end
 
   it "sees Meta's AI crawler as a bot" do
     request = fake_request.new(
-      ip: '57.141.20.10',
+      remote_ip: '57.141.20.10',
       user_agent: "meta-externalagent/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/crawler)"
     )
     controller = base.new(request)
     expect(controller.is_a_bot?).to be_truthy
   end
 
-  it "sees Alibaba Cloud range as a bad IP even with a spoofed Chrome UA" do
+  it "sees a banned range as a bad IP even with a spoofed Chrome UA" do
+    BannedIp.create!(ip: '47.82.0.0/16')
+    BannedIp.clear_cache
     request = fake_request.new(
-      ip: '47.82.10.35',
+      remote_ip: '47.82.10.35',
       user_agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
     )
     controller = base.new(request)
@@ -73,7 +79,7 @@ RSpec.describe PreventAbuse do
 
   it "sees HeadlessChrome as a bot" do
     request = fake_request.new(
-      ip: '127.0.0.1',
+      remote_ip: '127.0.0.1',
       user_agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"
     )
     controller = base.new(request)
@@ -82,7 +88,7 @@ RSpec.describe PreventAbuse do
 
   it "still allows facebookexternalhit link previews" do
     request = fake_request.new(
-      ip: '57.141.20.10',
+      remote_ip: '57.141.20.10',
       user_agent: "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)"
     )
     controller = base.new(request)

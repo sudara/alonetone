@@ -1,0 +1,27 @@
+<div class="space-y-4">
+  <%= render 'admin/shared/view_tabs', tabs: admin_user_view_tabs(:bandwidth) %>
+  <p class="text-sm text-fg-muted">
+    Top bandwidth consumers <%= admin_range ? "over the selected range" : "(all-time, cached)" %> at ~$0.12/GB.
+  </p>
+
+  <div class="space-y-2">
+    <% @rows.each do |user, gb| %>
+      <div class="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface-raised p-4">
+        <div class="flex min-w-0 gap-3">
+          <div class="size-10 shrink-0 overflow-hidden rounded-full bg-surface-overlay"><%= user_image(user, variant: :large_avatar) %></div>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <%= link_to user.name, admin_possibly_deleted_user_path(user.login), class: "truncate font-semibold text-accent hover:underline" %>
+              <% if user.soft_deleted? %><span class="shrink-0 rounded-full bg-surface-overlay px-2 py-0.5 text-xs text-fg-muted">deleted</span><% end %>
+            </div>
+            <p class="text-xs text-fg-faint"><%= pluralize(user.assets_count, 'track') %></p>
+          </div>
+        </div>
+        <div class="shrink-0 text-right">
+          <p class="font-semibold"><%= number_with_precision(gb, precision: 1, strip_insignificant_zeros: true) %> GB</p>
+          <p class="text-xs text-fg-faint"><%= number_to_currency(gb * 0.12) %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

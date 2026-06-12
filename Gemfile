@@ -41,9 +41,11 @@ gem 'rakismet'
 gem 'postmark-rails'
 
 # frontend
+gem 'chartkick'
+gem 'dartsass-rails'
+gem 'groupdate'
 gem 'jsbundling-rails'
 gem 'propshaft'
-gem 'dartsass-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 

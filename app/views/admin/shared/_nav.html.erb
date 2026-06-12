@@ -1,0 +1,35 @@
+<div class="flex items-center justify-between px-4 py-4">
+  <div class="flex items-center gap-2 font-semibold tracking-tight">
+    <%= link_to root_path, class: "flex" do %>
+      <%= image_tag "alonetone_logo_dark.svg", alt: "alonetone", class: "h-8 w-auto translate-y-px" %>
+    <% end %>
+    <%= link_to "admin", admin_path, class: "text-fg-muted [font-variant:small-caps]" %>
+  </div>
+  <label for="admin-nav-toggle"
+         class="cursor-pointer rounded-md p-1 text-fg-muted hover:text-fg lg:hidden">
+    <%= admin_icon :close %>
+    <span class="sr-only">Close menu</span>
+  </label>
+</div>
+
+<nav class="flex-1 space-y-6 overflow-y-auto px-3 pb-6">
+  <% admin_nav_groups.each do |group| %>
+    <div class="space-y-1">
+      <% if group[:label] %>
+        <p class="px-3 pb-1 text-xs font-semibold uppercase tracking-wider text-fg-faint"><%= group[:label] %></p>
+      <% end %>
+      <% group[:items].each do |item| %>
+        <% current = admin_nav_current?(item) %>
+        <%= link_to public_send(item[:path_helper]),
+              class: class_names(
+                "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                "bg-accent/15 text-accent" => current,
+                "text-fg-muted hover:bg-surface-overlay hover:text-fg" => !current
+              ) do %>
+          <%= admin_icon item[:icon] %>
+          <span><%= item[:label] %></span>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</nav>

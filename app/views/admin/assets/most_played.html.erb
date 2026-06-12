@@ -1,0 +1,14 @@
+<div class="space-y-4">
+  <%= render 'admin/shared/view_tabs', tabs: admin_track_view_tabs(:most_played) %>
+
+  <% if @play_counts.any? %>
+    <div class="space-y-2">
+      <% @play_counts.each do |asset_id, plays| %>
+        <% asset = @assets_by_id[asset_id]; next unless asset %>
+        <%= render 'admin/assets/play_count_row', asset: asset, plays: plays %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="rounded-xl border border-border bg-surface-raised p-6 text-sm text-fg-muted">No plays in this range.</p>
+  <% end %>
+</div>

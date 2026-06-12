@@ -73,9 +73,12 @@ end
 #
 # Indexes
 #
-#  index_listens_on_asset_id                       (asset_id)
-#  index_listens_on_created_at                     (created_at)
-#  index_listens_on_listener_id                    (listener_id)
-#  index_listens_on_track_owner_id                 (track_owner_id)
-#  index_listens_on_track_owner_id_and_created_at  (track_owner_id,created_at)
+#  index_listens_on_asset_id                                (asset_id)
+#  index_listens_on_created_at                              (created_at)
+#  index_listens_on_deleted_at_and_created_at_and_asset_id  (deleted_at,created_at,asset_id)
+#  index_listens_on_deleted_at_and_created_at_and_ip        (deleted_at,created_at,ip)
+#  index_listens_on_ip                                      (ip)
+#  index_listens_on_listener_id                             (listener_id)
+#  index_listens_on_track_owner_id                          (track_owner_id)
+#  index_listens_on_track_owner_id_and_created_at           (track_owner_id,created_at)
 #

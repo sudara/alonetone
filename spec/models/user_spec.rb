@@ -14,6 +14,26 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe 'authlogic setup' do
+    it 'raises rather than silently dropping every auth method when the DB is unreachable at load time' do
+      model = Class.new(ApplicationRecord) { self.table_name = 'users' }
+      allow(model).to receive(:column_names).and_raise(ActiveRecord::ConnectionNotEstablished)
+
+      expect {
+        model.acts_as_authentic { |c| c.raise_on_model_setup_error = true }
+      }.to raise_error(Authlogic::ModelSetupError)
+    end
+
+    it 'configures User to fail loudly so the silent-strip regression cannot return' do
+      expect(User.raise_on_model_setup_error).to be(true)
+    end
+
+    it 'exposes the Authlogic methods the account-approval jobs depend on' do
+      user = User.new
+      expect(user).to respond_to(:reset_password, :reset_perishable_token, :password=, :valid_password?)
+    end
+  end
+
   describe 'record selection method' do
     it 'finds a user by login' do
       user = users(:henri_willig)

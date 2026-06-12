@@ -1,0 +1,9 @@
+<div class="space-y-4">
+  <%= render 'admin/shared/view_tabs', tabs: admin_track_view_tabs(:all_time) %>
+
+  <div class="space-y-2">
+    <% @assets.each do |asset| %>
+      <%= render 'admin/assets/play_count_row', asset: asset, plays: asset.listens_count %>
+    <% end %>
+  </div>
+</div>

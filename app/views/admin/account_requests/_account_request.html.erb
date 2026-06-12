@@ -1,33 +1,43 @@
-<%= tag.div id: dom_id(account_request), class: account_request.status do %>
-  <div class="date_column">
-    <%= local_time_ago account_request.created_at %>
-    <div>
-      <%= account_request.status %>
+<%= tag.div id: dom_id(account_request), class: "rounded-xl border border-border bg-surface-raised p-4 space-y-3" do %>
+  <div class="flex items-start justify-between gap-3">
+    <div class="min-w-0">
+      <div class="flex items-center gap-2">
+        <span class="truncate font-semibold">
+          <%= account_request.claimed? ? link_to(account_request.login, user_home_path(account_request.login), class: "text-accent hover:underline") : account_request.login %>
+        </span>
+        <%= admin_status_badge account_request.status %>
+      </div>
+      <p class="truncate text-sm text-fg-muted"><%= account_request.email %></p>
     </div>
-    <div>
+    <div class="shrink-0 text-right text-xs text-fg-faint">
+      <%= local_time_ago account_request.created_at %>
       <% if account_request.moderated_by %>
-      by <%= account_request.moderated_by.login %>
+        <div>by <%= account_request.moderated_by.login %></div>
       <% end %>
     </div>
   </div>
-  <div class="user_column">
-    <div>
-      <div><%= account_request.claimed? ? link_to(account_request.login, user_home_path(account_request.login)) : account_request.login %></div>
-      <div><%= account_request.email %></div>
-      <div><%= "#{account_request.submission_count} submissions!!" if account_request.submission_count > 1 %></div>
+
+  <div class="flex flex-wrap items-center gap-2 text-xs">
+    <span class="rounded bg-surface-overlay px-2 py-0.5 font-medium uppercase tracking-wide text-fg-muted"><%= account_request.entity_type %></span>
+    <% if account_request.submission_count > 1 %>
+      <span class="rounded bg-warning/15 px-2 py-0.5 font-medium text-warning"><%= account_request.submission_count %> submissions</span>
+    <% end %>
+  </div>
+
+  <% if account_request.review_reason.present? %>
+    <p class="text-sm text-fg-muted">Reason: <%= account_request.review_reason %></p>
+  <% end %>
+
+  <p class="whitespace-pre-line text-sm text-fg"><%= account_request.details %></p>
+
+  <% if account_request.waiting? %>
+    <div class="flex gap-2 pt-1">
+      <%= button_to "Approve & Email", approve_admin_account_request_path(account_request), method: :put,
+            form_class: "flex-1 sm:flex-none",
+            class: "w-full rounded-lg bg-success px-4 py-2.5 text-sm font-semibold text-white hover:brightness-90 sm:w-auto sm:px-6" %>
+      <%= button_to "Deny", deny_admin_account_request_path(account_request), method: :put,
+            form_class: "flex-1 sm:flex-none",
+            class: "w-full rounded-lg bg-danger px-4 py-2.5 text-sm font-semibold text-white hover:brightness-90 sm:w-auto sm:px-6" %>
     </div>
-  </div>
-  <div class="bio_column">
-    <div><%= account_request.entity_type.upcase %></div>
-    <% if account_request.review_reason.present? %>
-      <div>Reason: <%= account_request.review_reason %></div>
-    <% end %>
-    <div><%= account_request.details %></div>
-  </div>
-  <div class="button_column">
-    <% if account_request.waiting? %>
-      <%= button_to "Approve & Email", approve_admin_account_request_path(account_request), class: 'approve_button', method: :put %>
-      <%= button_to "Deny", deny_admin_account_request_path(account_request), class: 'deny_button', method: :put %>
-    <% end %>
-  </div>
+  <% end %>
 <% end %>

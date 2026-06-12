@@ -46,3 +46,6 @@ yarn-debug.log*
 
 # Playwright MCP scratch output (snapshots, screenshots, console logs)
 .playwright-mcp/
+
+# project-management notes stay local
+/docs/admin-*

@@ -1,0 +1,16 @@
+<% if @pagy && @pagy.pages > 1 %>
+  <% page_url = ->(n) { url_for(request.path_parameters.merge(request.query_parameters).merge("page" => n)) } %>
+  <nav class="flex items-center justify-between gap-2 pt-2 text-sm">
+    <% if @pagy.previous %>
+      <%= link_to "← Prev", page_url.call(@pagy.previous), class: "rounded-lg border border-border bg-surface-raised px-3 py-1.5 text-fg-muted hover:text-fg" %>
+    <% else %>
+      <span class="rounded-lg border border-border px-3 py-1.5 text-fg-faint">← Prev</span>
+    <% end %>
+    <span class="text-fg-muted">Page <%= @pagy.page %> of <%= @pagy.pages %></span>
+    <% if @pagy.next %>
+      <%= link_to "Next →", page_url.call(@pagy.next), class: "rounded-lg border border-border bg-surface-raised px-3 py-1.5 text-fg-muted hover:text-fg" %>
+    <% else %>
+      <span class="rounded-lg border border-border px-3 py-1.5 text-fg-faint">Next →</span>
+    <% end %>
+  </nav>
+<% end %>

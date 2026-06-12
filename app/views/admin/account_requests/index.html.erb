@@ -1,27 +1,22 @@
-<div id="admin_columns">
-  <div class="admin_column_left box">
-    <h2>Admin</h2>
-    <%= render partial: 'admin/navigation' %>
-  </div>
-  <div class="admin_column_right">
+<% pills = [
+  { label: 'All', url: admin_account_requests_path, active: params[:filter_by].blank? },
+  { label: 'Waiting', url: admin_account_requests_path(filter_by: 'candidates'), active: params[:filter_by] == 'candidates' },
+  { label: 'Spammers', url: admin_account_requests_path(filter_by: 'spammers'), active: params[:filter_by] == 'spammers' },
+  { label: 'Claimed', url: admin_account_requests_path(filter_by: 'claimed'), active: params[:filter_by] == 'claimed' },
+  { label: 'Approved', url: admin_account_requests_path(filter_by: 'approved'), active: params[:filter_by] == 'approved' },
+  { label: 'Denied', url: admin_account_requests_path(filter_by: 'denied'), active: params[:filter_by] == 'denied' }
+] %>
 
-    <div class="mini_paginator top_paginator">
-      <%== pagy_nav @pagy %>
-    </div>
+<div class="space-y-4">
+  <%= render 'admin/shared/filter_pills', pills: pills %>
 
-    <div class="admin_column_right_inner box">
-      <header class="admin_requests">
-        <div class="date_column">Submitted</div>
-        <div class="user_column">User</div>
-        <div class="text_column">Text</div>
-      </header>
-      <div class="admin_requests_rows">
-         <%= render partial: 'account_request', collection: @account_requests %>
-      </div>
+  <% if @account_requests.any? %>
+    <div class="space-y-3">
+      <%= render partial: 'account_request', collection: @account_requests %>
     </div>
+  <% else %>
+    <p class="rounded-xl border border-border bg-surface-raised p-6 text-sm text-fg-muted">No account requests here.</p>
+  <% end %>
 
-    <div class="mini_paginator bottom_paginator">
-      <%== pagy_nav @pagy %>
-    </div>
-  </div>
+  <%= render 'admin/shared/pagination' %>
 </div>

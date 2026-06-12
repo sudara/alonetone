@@ -1,0 +1,9 @@
+<div class="flex gap-4 border-b border-border text-sm">
+  <% tabs.each do |tab| %>
+    <%= link_to tab[:label], tab[:url], class: class_names(
+          "-mb-px border-b-2 pb-2 font-medium transition-colors",
+          "border-accent text-fg" => tab[:active],
+          "border-transparent text-fg-muted hover:text-fg" => !tab[:active]
+        ) %>
+  <% end %>
+</div>

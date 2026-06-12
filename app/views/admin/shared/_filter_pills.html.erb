@@ -1,0 +1,10 @@
+<div class="-mx-1 flex gap-1 overflow-x-auto px-1 pb-1">
+  <% pills.each do |pill| %>
+    <%= link_to pill[:label], pill[:url],
+          class: class_names(
+            "shrink-0 whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-medium transition-colors",
+            "bg-accent text-accent-fg" => pill[:active],
+            "border border-border bg-surface-raised text-fg-muted hover:text-fg" => !pill[:active]
+          ) %>
+  <% end %>
+</div>

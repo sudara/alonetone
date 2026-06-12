@@ -3,10 +3,12 @@
 module Admin
   class MassInvitesController < Admin::BaseController
     def index
+      @admin_title = 'Mass Invites'
       @pagy, @mass_invites = pagy(filtered_mass_invites)
     end
 
     def new
+      @admin_title = 'New Mass Invite'
       @mass_invite = MassInvite.new
     end
 
