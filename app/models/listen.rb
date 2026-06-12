@@ -46,6 +46,7 @@ class Listen < ActiveRecord::Base
       date.strftime('%b %y').to_s]
   end
 
+  # Decrement rather than reset: soft-deletes never adjust these counters, so they mean "created minus purged".
   def self.decrement_counter_caches(asset_counts: {}, owner_counts: {})
     decrement_counter_cache(Asset, asset_counts)
     decrement_counter_cache(User, owner_counts)

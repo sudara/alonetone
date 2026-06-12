@@ -57,6 +57,20 @@ RSpec.describe 'Admin perma-delete', type: :request do
       expect(owner.reload.listens_count).to eq(owner_listens_count - 3)
     end
 
+    it 'purges and decrements the asset counter for a listen that has no track_owner' do
+      deleted_user = users(:aaron)
+      surviving_track = assets(:valid_mp3)
+      listen = surviving_track.listens.create!(listener: deleted_user, track_owner: surviving_track.user)
+      listen.update_columns(track_owner_id: nil)
+      surviving_asset_count = surviving_track.reload.listens_count
+
+      deleted_user.update_columns(deleted_at: 40.days.ago)
+      delete purge_admin_user_path(deleted_user.login)
+
+      expect(Listen.with_deleted.exists?(listen.id)).to be(false)
+      expect(surviving_track.reload.listens_count).to eq(surviving_asset_count - 1)
+    end
+
     it 'purges a user who has a patron record' do
       Patron.create!(user: user)
       user.update_columns(deleted_at: 40.days.ago)
