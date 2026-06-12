@@ -70,8 +70,10 @@ class UserCommand
   # with_deleted everywhere: by the time a user is perma-deleted, the soft-delete
   # cascade has already hidden all their relations from the default scope.
   def efficiently_destroy_relations
-    Listen.with_deleted.where(track_owner_id: user.id).delete_all
-    Listen.with_deleted.where(listener_id: user.id).delete_all
+    Listen.transaction do
+      Listen.with_deleted.where(track_owner_id: user.id).delete_all
+      purge_listens_to_surviving_tracks
+    end
     # other users' playlist tracks_counts were already decremented when the user was soft-deleted
     Track.with_deleted.joins('INNER JOIN assets ON assets.id = tracks.asset_id')
       .where(assets: { user_id: user.id }).delete_all
@@ -81,5 +83,17 @@ class UserCommand
       user.send(user_relation).with_deleted.delete_all
     end
     true
+  end
+
+  def purge_listens_to_surviving_tracks
+    scope = Listen.with_deleted
+      .where(listener_id: user.id)
+      .where('track_owner_id IS NULL OR track_owner_id != ?', user.id)
+
+    Listen.decrement_counter_caches(
+      asset_counts: scope.group(:asset_id).count,
+      owner_counts: scope.group(:track_owner_id).count
+    )
+    scope.delete_all
   end
 end

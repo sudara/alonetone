@@ -42,6 +42,21 @@ RSpec.describe 'Admin perma-delete', type: :request do
       expect(Listen.with_deleted.where(id: listen.id)).to be_empty
     end
 
+    it 'decrements counters for surviving tracks the deleted user listened to' do
+      listener = users(:aaron)
+      asset = assets(:valid_mp3)
+      owner = asset.user
+      3.times { asset.listens.create!(listener: listener, track_owner: owner) }
+      asset_listens_count = asset.reload.listens_count
+      owner_listens_count = owner.reload.listens_count
+
+      listener.update_columns(deleted_at: 40.days.ago)
+      delete purge_admin_user_path(listener.login)
+
+      expect(asset.reload.listens_count).to eq(asset_listens_count - 3)
+      expect(owner.reload.listens_count).to eq(owner_listens_count - 3)
+    end
+
     it 'purges a user who has a patron record' do
       Patron.create!(user: user)
       user.update_columns(deleted_at: 40.days.ago)
@@ -78,6 +93,17 @@ RSpec.describe 'Admin perma-delete', type: :request do
       delete purge_admin_asset_path(asset.id)
       expect(Asset.with_deleted.exists?(asset.id)).to be(false)
       expect(Listen.where(id: listen.id)).to be_empty
+    end
+
+    it 'decrements the owner counter cache when purging a deleted asset' do
+      owner = asset.user
+      3.times { asset.listens.create!(track_owner: owner) }
+      owner_listens_count = owner.reload.listens_count
+
+      asset.update_columns(deleted_at: 40.days.ago)
+      delete purge_admin_asset_path(asset.id)
+
+      expect(owner.reload.listens_count).to eq(owner_listens_count - 3)
     end
   end
 

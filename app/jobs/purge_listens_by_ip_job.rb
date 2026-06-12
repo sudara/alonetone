@@ -44,16 +44,8 @@ class PurgeListensByIpJob < ApplicationJob
         asset_counts = batch.group(:asset_id).count
         owner_counts = batch.group(:track_owner_id).count
         batch.delete_all
-        decrement(Asset, asset_counts)
-        decrement(User, owner_counts)
+        Listen.decrement_counter_caches(asset_counts: asset_counts, owner_counts: owner_counts)
       end
-    end
-  end
-
-  # Decrement rather than reset: soft-deletes never adjust these counters, so they mean "created minus purged".
-  def decrement(model, counts)
-    counts.except(nil).group_by(&:last).each do |count, pairs|
-      model.update_counters(pairs.map(&:first), listens_count: -count)
     end
   end
 end

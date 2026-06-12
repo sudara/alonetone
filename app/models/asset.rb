@@ -206,10 +206,17 @@ class Asset < ApplicationRecord
     Storage::Location.new(audio_file, signed: true)
   end
 
-  def self.destroy_deleted_accounts_older_than_30_days
-    Asset.destroyable.find_each do |asset|
+  def self.destroy_deleted_accounts_older_than_30_days(limit: nil, dry_run: false)
+    scope = Asset.destroyable
+    scope = scope.limit(limit) if limit
+    return scope.count if dry_run
+
+    destroyed = 0
+    scope.find_each do |asset|
       AssetCommand.new(asset).destroy_with_relations
+      destroyed += 1
     end
+    destroyed
   end
 
   def self.filter_by(filter)

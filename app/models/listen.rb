@@ -46,6 +46,18 @@ class Listen < ActiveRecord::Base
       date.strftime('%b %y').to_s]
   end
 
+  def self.decrement_counter_caches(asset_counts: {}, owner_counts: {})
+    decrement_counter_cache(Asset, asset_counts)
+    decrement_counter_cache(User, owner_counts)
+  end
+
+  def self.decrement_counter_cache(model, counts)
+    counts.except(nil).group_by(&:last).each do |count, pairs|
+      model.update_counters(pairs.map(&:first), listens_count: -count)
+    end
+  end
+  private_class_method :decrement_counter_cache
+
   protected
 
   def truncate_user_agent

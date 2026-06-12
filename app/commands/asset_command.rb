@@ -29,11 +29,14 @@ class AssetCommand
   end
 
   def destroy_with_relations
-    asset.comments&.with_deleted&.delete_all
-    asset.tracks&.with_deleted&.delete_all
-    asset.listens&.with_deleted&.delete_all
-    asset.audio_feature&.delete
-    asset.destroy
+    Asset.transaction do
+      decrement_listen_counters
+      asset.comments&.with_deleted&.delete_all
+      asset.tracks&.with_deleted&.delete_all
+      asset.listens&.with_deleted&.delete_all
+      asset.audio_feature&.destroy!
+      asset.destroy!
+    end
   end
 
   def spam_and_soft_delete_with_relations
@@ -50,5 +53,13 @@ class AssetCommand
     asset.ham!
     asset.update_attribute :is_spam, false
     restore_with_relations
+  end
+
+  private
+
+  def decrement_listen_counters
+    Listen.decrement_counter_caches(
+      owner_counts: asset.listens.with_deleted.group(:track_owner_id).count
+    )
   end
 end

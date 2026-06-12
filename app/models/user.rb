@@ -176,8 +176,17 @@ class User < ApplicationRecord
     !active? ? clear_token! : false
   end
 
-  def self.destroy_deleted_accounts_older_than_30_days
-    User.destroyable.find_each(&:destroy)
+  def self.destroy_deleted_accounts_older_than_30_days(limit: nil, dry_run: false)
+    scope = User.destroyable
+    scope = scope.limit(limit) if limit
+    return scope.count if dry_run
+
+    destroyed = 0
+    scope.find_each do |user|
+      user.destroy!
+      destroyed += 1
+    end
+    destroyed
   end
 
   def self.with_same_ip_as(user)
