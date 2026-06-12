@@ -1,6 +1,10 @@
 require "rails_helper"
 
 RSpec.describe 'playlists', type: :feature, js: true do
+  # The buffered-fill rect grows on a CSS width transition that GSAP pausing
+  # doesn't touch, so pin it to a fixed width for a stable Percy capture.
+  FREEZE_BUFFERED_FILL = '.player_waveform_loaded_reveal { width: 500px !important; transition: none !important; }'.freeze
+
   it 'renders track and cover pages' do
     logged_in(:arthur) do
       visit 'henri_willig/playlists/polderkaas'
@@ -17,7 +21,10 @@ RSpec.describe 'playlists', type: :feature, js: true do
         # persistent player at the bottom of the page.
         expect(page).to have_css('#player.visible')
         expect(page).to have_css('.track_content .track_post')
-        page.percy_snapshot('Playlist Track Loading')
+        # Points are fetched on demand, so wait for them or the snapshot races an
+        # empty SVG. visible: :all is required: the polygon lives in <defs>.
+        expect(page).to have_xpath('//*[@id="player_waveform_points" and string-length(@points) > 0]', visible: :all)
+        page.percy_snapshot('Playlist Track Loading', percy_css: FREEZE_BUFFERED_FILL)
       end
 
       # Navigating away and back, the persistent player keeps playing
@@ -39,7 +46,8 @@ RSpec.describe 'playlists', type: :feature, js: true do
         # to an exact position for a deterministic Percy capture.
         page.percy_snapshot('Playlist Track Play, Seek, Pause',
           percy_css: ".player_progress { left: 33% !important; }
-            .player_waveform_reveal { x: -170px !important; }")
+            .player_waveform_reveal { x: -170px !important; }
+            #{FREEZE_BUFFERED_FILL}")
       end
     end
   end
