@@ -11,22 +11,30 @@ set -eo pipefail
 # plain `diff` or `git reset` execute as terminal `reset`.
 
 usage() {
-  echo "Usage: ./deploy [--force-bundle|--bundle]"
+  echo "Usage: ./deploy [--force-bundle|--bundle] [--force-migrate|--migrate]"
   echo
   echo "Options:"
   echo "  --force-bundle  Run bundle install even when Gemfile inputs are unchanged,"
   echo "                  and use a full Puma restart. Useful after changing ignored"
   echo "                  Ruby/runtime files on the server."
   echo "                  Alias: --bundle."
+  echo "  --force-migrate Run db:migrate even when the OLD..NEW diff shows no db/"
+  echo "                  changes. Needed when a prior failed deploy already advanced"
+  echo "                  HEAD to origin/main, so the retry sees no diff to migrate."
+  echo "                  Alias: --migrate."
   echo "  -h, --help      Show this help."
 }
 
 FORCE_BUNDLE=0
+FORCE_MIGRATE=0
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
     --force-bundle|--bundle)
       FORCE_BUNDLE=1
+      ;;
+    --force-migrate|--migrate)
+      FORCE_MIGRATE=1
       ;;
     -h|--help)
       usage
@@ -46,13 +54,17 @@ echo "Deployanatoring teh codez!"
 if [ "$FORCE_BUNDLE" -eq 1 ]; then
   echo "Forcing bundle install and full Puma restart."
 fi
+if [ "$FORCE_MIGRATE" -eq 1 ]; then
+  echo "Forcing db:migrate regardless of the db/ diff."
+fi
 echo
 
 # handle git and bundle install
-ssh alonetone 'bash -s' -- "$FORCE_BUNDLE" <<'REMOTE_SCRIPT'
+ssh alonetone 'bash -s' -- "$FORCE_BUNDLE" "$FORCE_MIGRATE" <<'REMOTE_SCRIPT'
   set -eo pipefail
 
   FORCE_BUNDLE="$1"
+  FORCE_MIGRATE="$2"
 
   cd /data/alonetone
 
@@ -167,8 +179,12 @@ ssh alonetone 'bash -s' -- "$FORCE_BUNDLE" <<'REMOTE_SCRIPT'
     echo "skipping yarn install, package.json and yarn.lock have not changed since last time."
   fi
 
-  if [ "$RUN_MIGRATIONS" -eq 1 ]; then
-    echo "Running migrations, hold tight..."
+  if [ "$RUN_MIGRATIONS" -eq 1 ] || [ "$FORCE_MIGRATE" -eq 1 ]; then
+    if [ "$RUN_MIGRATIONS" -eq 1 ]; then
+      echo "Running migrations, hold tight..."
+    else
+      echo "Running migrations (forced by deploy argument)..."
+    fi
     time "${BUNDLE_COMMAND[@]}" exec rake db:migrate
   fi
 
