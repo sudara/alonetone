@@ -27,10 +27,6 @@ class Listen < ActiveRecord::Base
     where(created_at: Time.now.at_beginning_of_day..Time.now).count
   end
 
-  def self.most_active_ips(limit = 25)
-    top_ips(limit: limit, range: 30.days.ago..Time.current)
-  end
-
   def self.top_ips(limit: 25, range: nil)
     index = range ? 'index_listens_on_created_at_and_ip' : 'index_listens_on_ip'
     scope = with_deleted.from("listens FORCE INDEX(#{index})").where.not(ip: nil)

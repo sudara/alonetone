@@ -42,10 +42,6 @@ class Asset < ApplicationRecord
   has_many :listens,   -> { order('listens.created_at DESC') }, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
 
-  has_many :listeners,
-    -> { distinct.order('listens.created_at DESC') },
-    through: :listens
-
   def recent_listeners(limit: 6)
     recent_listens = Listen
       .from('listens FORCE INDEX(index_listens_on_asset_deleted_listener_created)')
