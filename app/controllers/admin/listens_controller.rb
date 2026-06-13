@@ -5,8 +5,7 @@ module Admin
     def index
       @admin_title = 'Listening IPs'
       @admin_range_enabled = true
-      scope = admin_range ? Listen.where(created_at: admin_range) : Listen
-      @ip_counts = scope.where.not(ip: nil).group(:ip).order('count_all DESC').limit(25).count
+      @ip_counts = Listen.top_ips(range: admin_range)
       @ban_matcher = BannedIp::Matcher.new(BannedIp.pluck(:ip))
     end
 

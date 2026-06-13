@@ -225,6 +225,73 @@ RSpec.describe Asset, type: :model do
         )
       }.to change { user.reload.assets_count }.by(1)
     end
+
+    it "updates the user's last uploaded timestamp" do
+      user.update!(last_uploaded_at: 1.year.ago)
+
+      travel_to Time.current.change(usec: 0) do
+        asset = user.assets.create!(
+          title: 'Smallest',
+          audio_file: fixture_file_upload('smallest.mp3', 'audio/mpeg')
+        )
+
+        expect(user.reload.last_uploaded_at.to_i).to eq(asset.created_at.to_i)
+      end
+    end
+  end
+
+  describe '#recent_listeners' do
+    let(:asset) { assets(:valid_mp3) }
+
+    it 'returns listeners by their most recent listen' do
+      old_listener = users(:arthur)
+      recent_listener = users(:sudara)
+
+      Listen.create!(
+        asset: asset,
+        listener: old_listener,
+        track_owner: asset.user,
+        created_at: 3.days.ago
+      )
+      Listen.create!(
+        asset: asset,
+        listener: recent_listener,
+        track_owner: asset.user,
+        created_at: 1.day.ago
+      )
+
+      expect(asset.recent_listeners(limit: 2).to_a).to eq(
+        [recent_listener, old_listener]
+      )
+    end
+
+    it 'returns each listener once' do
+      listener = users(:arthur)
+
+      2.times do |offset|
+        Listen.create!(
+          asset: asset,
+          listener: listener,
+          track_owner: asset.user,
+          created_at: offset.hours.ago
+        )
+      end
+
+      expect(asset.recent_listeners(limit: 6).to_a.count(listener)).to eq(1)
+    end
+
+    it 'ignores soft-deleted users' do
+      deleted_user = users(:deleted_yesterday)
+
+      Listen.create!(
+        asset: asset,
+        listener: deleted_user,
+        track_owner: asset.user,
+        created_at: 1.hour.ago
+      )
+
+      expect(asset.recent_listeners(limit: 6)).not_to include(deleted_user)
+    end
   end
 
   context "on update" do
@@ -292,6 +359,19 @@ RSpec.describe Asset, type: :model do
       }.to change { user.reload.assets_count }.by(-1)
     end
 
+    it "refreshes the user's last uploaded timestamp on soft delete" do
+      user = users(:jamie_kiesl)
+      latest_asset = assets(:valid_asset_to_test_on_latest)
+      previous_asset = assets(:another_valid_asset_to_test_on_latest)
+      user.refresh_last_uploaded_at!
+
+      expect {
+        AssetCommand.new(latest_asset).soft_delete_with_relations
+      }.to change { user.reload.last_uploaded_at.to_i }
+        .from(latest_asset.created_at.to_i)
+        .to(previous_asset.created_at.to_i)
+    end
+
     it "touches the user on soft delete to expire user-level track caches" do
       user = users(:arthur)
       original_updated_at = user.updated_at
@@ -309,6 +389,20 @@ RSpec.describe Asset, type: :model do
       expect {
         AssetCommand.new(assets(:valid_arthur_mp3)).restore_with_relations
       }.to change { user.reload.assets_count }.by(1)
+    end
+
+    it "refreshes the user's last uploaded timestamp on restore" do
+      user = users(:jamie_kiesl)
+      latest_asset = assets(:valid_asset_to_test_on_latest)
+      previous_asset = assets(:another_valid_asset_to_test_on_latest)
+      user.refresh_last_uploaded_at!
+      AssetCommand.new(latest_asset).soft_delete_with_relations
+
+      expect {
+        AssetCommand.new(latest_asset).restore_with_relations
+      }.to change { user.reload.last_uploaded_at.to_i }
+        .from(previous_asset.created_at.to_i)
+        .to(latest_asset.created_at.to_i)
     end
 
     it "touches the user on restore to expire user-level track caches" do

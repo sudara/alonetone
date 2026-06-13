@@ -56,6 +56,18 @@ RSpec.describe Admin::ListensController, type: :request do
       expect(response.body).to include('>banned<')
     end
 
+    it 'includes soft-deleted listens in listening ip counts' do
+      asset = assets(:valid_mp3)
+      2.times do
+        asset.listens.create!(track_owner: asset.user, ip: '203.0.113.88', deleted_at: 1.day.ago)
+      end
+
+      get admin_listens_path, params: { range: 'all' }
+
+      expect(response.body).to include('203.0.113.88')
+      expect(response.body).to include('2 listens')
+    end
+
     it 'unbans an ip' do
       banned = BannedIp.create!(ip: '203.0.113.21')
       delete admin_banned_ip_path(banned)

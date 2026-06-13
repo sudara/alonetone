@@ -3,6 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @source "../../views/admin";
+@source "../../views/layouts/admin.html.erb";
 @source "../../javascript/controllers";
 
 @theme {

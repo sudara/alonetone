@@ -11,28 +11,28 @@
   <%= javascript_include_tag 'admin', 'data-turbo-track': 'reload', defer: true %>
 </head>
 
-<body class="min-h-screen bg-surface text-fg antialiased lg:flex">
+<body class="min-h-screen bg-surface text-fg antialiased min-[500px]:flex">
   <input type="checkbox" id="admin-nav-toggle" class="peer sr-only">
 
   <label for="admin-nav-toggle" aria-hidden="true"
-         class="fixed inset-0 z-30 hidden bg-black/60 peer-checked:block lg:hidden"></label>
+         class="fixed inset-0 z-30 hidden bg-black/60 peer-checked:block min-[500px]:hidden"></label>
 
-  <aside class="fixed inset-y-0 left-0 z-40 flex w-64 -translate-x-full flex-col border-r border-border bg-surface-raised transition-transform duration-200 peer-checked:translate-x-0 lg:static lg:translate-x-0 lg:shrink-0">
+  <aside class="fixed inset-y-0 right-0 z-40 flex w-64 translate-x-full flex-col border-l border-border bg-surface-raised transition-transform duration-200 peer-checked:translate-x-0 min-[500px]:static min-[500px]:translate-x-0 min-[500px]:shrink-0 min-[500px]:border-l-0 min-[500px]:border-r">
     <%= render 'admin/shared/nav' %>
   </aside>
 
   <div class="flex min-w-0 flex-1 flex-col">
     <header class="sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-surface/95 px-4 py-3 backdrop-blur sm:px-6">
-      <%= link_to root_path, class: "shrink-0 lg:hidden" do %><%= image_tag "alonetone_logo_dark.svg", alt: "alonetone", class: "h-8 w-auto" %><% end %>
+      <%= link_to root_path, class: "shrink-0 min-[500px]:hidden" do %><%= image_tag "alonetone_logo_dark.svg", alt: "alonetone", class: "h-8 w-auto" %><% end %>
 
-      <h1 class="min-w-0 truncate text-base font-semibold lg:text-2xl"><%= @admin_title || controller_name.titleize %></h1>
+      <h1 class="min-w-0 truncate text-base font-semibold min-[500px]:text-2xl"><%= @admin_title || controller_name.titleize %></h1>
 
       <div class="ml-auto flex shrink-0 items-center gap-2">
         <% if @admin_range_enabled %>
           <%= render 'admin/shared/range_selector' %>
         <% end %>
         <label for="admin-nav-toggle"
-               class="-mr-1 cursor-pointer rounded-md p-1.5 text-fg-muted hover:bg-surface-overlay hover:text-fg lg:hidden">
+               class="-mr-1 cursor-pointer rounded-md p-1.5 text-fg-muted hover:bg-surface-overlay hover:text-fg min-[500px]:hidden">
           <%= admin_icon :menu, css: "size-6" %>
           <span class="sr-only">Open menu</span>
         </label>
