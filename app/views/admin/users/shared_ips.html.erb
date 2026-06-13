@@ -7,12 +7,15 @@
       <% next if ip.blank? %>
       <div class="rounded-xl border border-border bg-surface-raised p-4">
         <div class="flex items-center justify-between gap-3">
-          <%= link_to ip, "https://www.botsvsbrowsers.com/ip/#{ip}", target: "_blank", rel: "noopener", class: "font-mono text-sm text-accent hover:underline" %>
-          <span class="shrink-0 rounded-full bg-surface-overlay px-2 py-0.5 text-xs font-medium text-fg-muted"><%= count %> accounts</span>
+          <%= link_to ip, admin_ip_lookup_url(ip), target: "_blank", rel: "noopener", class: "font-mono text-sm text-accent hover:underline" %>
+          <div class="flex shrink-0 flex-wrap justify-end gap-2">
+            <span class="rounded-full bg-surface-overlay px-2 py-0.5 text-xs font-medium text-fg-muted"><%= pluralize(count, 'account') %></span>
+            <span class="rounded-full bg-surface-overlay px-2 py-0.5 text-xs font-medium text-fg-muted"><%= pluralize(@track_counts_by_ip.fetch(ip, 0), 'track') %></span>
+          </div>
         </div>
         <p class="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-sm">
           <% @users_by_ip.fetch(ip, []).each do |user| %>
-            <%= link_to user.name, admin_possibly_deleted_user_path(user.login), class: "text-accent hover:underline" %>
+            <%= link_to user.login, admin_possibly_deleted_user_path(user.login), class: "text-accent hover:underline" %>
           <% end %>
         </p>
       </div>

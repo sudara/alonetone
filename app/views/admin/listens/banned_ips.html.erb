@@ -18,12 +18,24 @@
             <p class="text-xs text-fg-faint">
               banned <%= local_time_ago banned.created_at %><% if banned.banned_by %> by <%= banned.banned_by.login %><% end %>
             </p>
+            <% impacted_users = @users_by_banned_ip.fetch(banned.id, []) %>
+            <p class="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs">
+              <span class="text-fg-faint">Impacted accounts:</span>
+              <% if impacted_users.any? %>
+                <% impacted_users.each do |user| %>
+                  <%= link_to user.login, admin_possibly_deleted_user_path(user.login), class: "text-accent hover:underline" %>
+                <% end %>
+              <% else %>
+                <span class="text-fg-faint">none by login IP</span>
+              <% end %>
+            </p>
           </div>
           <% if admin? %>
             <div class="flex shrink-0 gap-2">
               <% if banned.purgeable_listens? %>
-                <%= button_to "Purge listens", admin_purge_banned_ip_path(banned), method: :post, class: admin_btn(:danger),
-                      data: { turbo_confirm: "Permanently delete every listen ever recorded from #{banned.ip}? Artist play counts will drop. This cannot be undone." } %>
+                <% listen_count = @listen_counts_by_banned_ip.fetch(banned.id, 0) %>
+                <%= button_to "Purge #{number_with_delimiter(listen_count)} listens", admin_purge_banned_ip_path(banned), method: :post, class: admin_btn(:danger),
+                      form: { data: { turbo_confirm: "Permanently delete #{number_with_delimiter(listen_count)} listens from #{banned.ip}? Artist play counts will drop. This cannot be undone." } } %>
               <% end %>
               <%= button_to "Unban", admin_banned_ip_path(banned), method: :delete, class: admin_btn(:neutral) %>
             </div>

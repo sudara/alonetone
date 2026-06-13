@@ -56,6 +56,21 @@ module AdminHelper
 
   def admin_btn(kind) = ADMIN_BTN.fetch(kind)
 
+  def admin_ip_lookup_url(ip)
+    "https://www.abuseipdb.com/check/#{ERB::Util.url_encode(ip.to_s)}"
+  end
+
+  def admin_compact_number(number)
+    number = number.to_i
+    absolute = number.abs
+    units = [[1_000_000_000, 'B'], [1_000_000, 'M'], [1_000, 'k']]
+    divisor, suffix = units.find { |threshold, _suffix| absolute >= threshold }
+    return number_with_delimiter(number) unless divisor
+
+    formatted = format('%.1f', number.to_f / divisor).sub(/\.0$/, '')
+    "#{formatted}#{suffix}"
+  end
+
   def admin_user_view_tabs(current)
     [
       { label: 'List', url: admin_users_path, active: current == :list },

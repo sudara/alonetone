@@ -68,6 +68,34 @@ RSpec.describe Admin::ListensController, type: :request do
       expect(response.body).to include('2 listens')
     end
 
+    it 'links listening ips to lookup and displays users with matching login ip' do
+      users(:arthur).update!(current_login_ip: '203.0.113.77')
+      asset = assets(:valid_mp3)
+      asset.listens.create!(track_owner: asset.user, ip: '203.0.113.77')
+
+      get admin_listens_path, params: { range: 'all' }
+
+      expect(response.body).to include('https://www.abuseipdb.com/check/203.0.113.77')
+      expect(response.body).not_to include('botsvsbrowsers')
+      expect(response.body).to include(admin_possibly_deleted_user_path(users(:arthur).login))
+    end
+
+    it 'shows purge listen counts and users impacted by an IPv4 range ban' do
+      banned = BannedIp.create!(ip: '198.51.0.0/16')
+      users(:arthur).update!(current_login_ip: '198.51.100.9')
+      users(:aaron).update!(current_login_ip: '198.52.100.9')
+      asset = assets(:valid_mp3)
+      2.times { asset.listens.create!(track_owner: asset.user, ip: '198.51.100.9') }
+      asset.listens.create!(track_owner: asset.user, ip: '198.52.100.9')
+
+      get admin_banned_ips_path
+
+      expect(response.body).to include('Purge 2 listens')
+      expect(response.body).to include(admin_possibly_deleted_user_path(users(:arthur).login))
+      expect(response.body).not_to include(admin_possibly_deleted_user_path(users(:aaron).login))
+      expect(response.body).to include(admin_purge_banned_ip_path(banned))
+    end
+
     it 'unbans an ip' do
       banned = BannedIp.create!(ip: '203.0.113.21')
       delete admin_banned_ip_path(banned)

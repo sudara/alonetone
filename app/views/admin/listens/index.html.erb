@@ -7,15 +7,23 @@
       <% @ip_counts.each do |ip, count| %>
         <div class="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface-raised p-4">
           <div class="min-w-0">
-            <%= link_to ip, "https://www.botsvsbrowsers.com/ip/#{ip}", target: "_blank", rel: "noopener", class: "font-mono text-sm text-accent hover:underline" %>
+            <%= link_to ip, admin_ip_lookup_url(ip), target: "_blank", rel: "noopener", class: "font-mono text-sm text-accent hover:underline" %>
             <p class="text-xs text-fg-faint"><%= number_with_delimiter(count) %> listens</p>
+            <% if (users = @users_by_ip.fetch(ip, [])).any? %>
+              <p class="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs">
+                <span class="text-fg-faint">Login IP:</span>
+                <% users.each do |user| %>
+                  <%= link_to user.login, admin_possibly_deleted_user_path(user.login), class: "text-accent hover:underline" %>
+                <% end %>
+              </p>
+            <% end %>
           </div>
           <div class="shrink-0">
             <% if @ban_matcher.banned?(ip) %>
               <span class="rounded-full bg-danger/15 px-2 py-0.5 text-xs font-medium text-danger-hover">banned</span>
             <% elsif admin? %>
               <%= button_to "Ban", admin_ban_ip_path(ip: ip), method: :post, class: admin_btn(:danger),
-                    data: { turbo_confirm: "Ban #{ip}? Playback and listen tracking from it will be denied." } %>
+                    form: { data: { turbo_confirm: "Ban #{ip}? Playback and listen tracking from it will be denied." } } %>
             <% end %>
           </div>
         </div>
