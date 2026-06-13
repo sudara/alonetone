@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_13_130000) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_13_150000) do
   create_table "account_requests", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.text "details"
@@ -127,6 +127,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_13_130000) do
     t.index ["commentable_type", "is_spam", "private"], name: "index_comments_on_commentable_type_and_is_spam_and_private"
     t.index ["commenter_id"], name: "index_comments_on_commenter_id"
     t.index ["deleted_at", "created_at"], name: "index_comments_on_deleted_at_and_created_at"
+    t.index ["is_spam", "updated_at"], name: "index_comments_on_is_spam_and_updated_at"
     t.index ["user_id", "commentable_type", "is_spam", "private"], name: "by_user_id_type_spam_private"
   end
 

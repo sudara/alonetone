@@ -7,7 +7,12 @@ RSpec.describe Admin::DashboardStats do
     it 'counts all non-deleted records' do
       expect(stats.new_users).to eq(User.count)
       expect(stats.new_tracks).to eq(Asset.count)
-      expect(stats.new_comments).to eq(Comment.count)
+      expect(stats.new_comments).to eq(Comment.where(is_spam: false).count)
+      expect(stats.new_spam_comments).to eq(Comment.where(is_spam: true).count)
+      expect(stats.total_users).to eq(User.count)
+      expect(stats.total_tracks).to eq(Asset.count)
+      expect(stats.total_comments).to eq(Comment.where(is_spam: false).count)
+      expect(stats.total_listens).to eq(Asset.with_deleted.sum(:listens_count))
     end
 
     it 'uses cached listen counts instead of scanning the listens table' do
@@ -36,6 +41,16 @@ RSpec.describe Admin::DashboardStats do
       series = stats.new_tracks_series
       expect(series.keys).to all(be_a(Date))
       expect(series.values.sum).to eq(stats.new_tracks)
+    end
+
+    it 'counts only non-spam comments as new comments' do
+      asset = assets(:valid_mp3)
+      Comment.create!(commentable: asset, commenter: users(:arthur), body: 'not spam', created_at: 1.day.ago)
+      Comment.create!(commentable: asset, commenter: users(:arthur), body: 'spam', is_spam: true, created_at: 1.day.ago)
+
+      expect(stats.new_comments).to eq(Comment.where(created_at: range, is_spam: false).count)
+      expect(stats.new_spam_comments).to eq(Comment.where(created_at: range, is_spam: true).count)
+      expect(stats.new_comments_series.values.sum).to eq(stats.new_comments)
     end
 
     it 'counts listens within the range from the listens table' do
@@ -122,9 +137,14 @@ RSpec.describe Admin::DashboardStats do
     subject(:stats) { described_class.new(range: nil, bucket: :month, range_key: 'all') }
 
     it 'reports spam and purge-eligible counts' do
+      Comment.create!(commentable: assets(:valid_mp3), commenter: users(:arthur), body: 'old spam',
+        is_spam: true, updated_at: 40.days.ago)
+
       expect(stats.spam_tracks).to eq(Asset.with_deleted.where(is_spam: true).count)
       expect(stats.spam_comments).to eq(Comment.where(is_spam: true).count)
-      expect(stats.perma_deletable).to eq(User.destroyable.count + Asset.destroyable.count)
+      expect(stats.perma_deletable).to eq(
+        User.destroyable.count + Asset.destroyable.count + Comment.purgeable_spam_or_deleted.count
+      )
     end
   end
 end

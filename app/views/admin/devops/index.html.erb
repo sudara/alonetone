@@ -25,8 +25,9 @@
     <h2 class="mb-2 text-sm font-semibold uppercase tracking-wider text-fg-faint">Perma-delete sweep</h2>
     <div class="space-y-3 rounded-xl border border-border bg-surface-raised p-4">
       <p class="text-sm text-fg">
-        <span class="font-semibold"><%= @destroyable_users_count %></span> accounts and
-        <span class="font-semibold"><%= @destroyable_assets_count %></span> tracks soft-deleted more than 30 days ago are eligible for permanent deletion.
+        <span class="font-semibold"><%= @destroyable_users_count %></span> accounts,
+        <span class="font-semibold"><%= @destroyable_assets_count %></span> tracks, and
+        <span class="font-semibold"><%= @destroyable_comments_count %></span> spam or deleted comments older than 30 days are eligible for permanent deletion.
       </p>
       <p class="text-xs text-fg-faint">The automatic 30-day sweep runs via system cron; this triggers it on demand.</p>
 
@@ -64,9 +65,28 @@
         </div>
       <% end %>
 
-      <% if admin? && (@destroyable_users_count.positive? || @destroyable_assets_count.positive?) %>
+      <% if @destroyable_comments.any? %>
+        <div>
+          <h3 class="mb-1 text-xs font-semibold uppercase tracking-wider text-fg-faint">Comments</h3>
+          <ul class="divide-y divide-border text-sm">
+            <% @destroyable_comments.each do |comment| %>
+              <li class="flex items-center justify-between gap-3 py-1.5">
+                <span class="truncate"><%= truncate(comment.body, length: 80) %></span>
+                <span class="shrink-0 text-xs text-fg-faint">
+                  <%= comment.is_spam? ? 'spam' : 'deleted' %> <%= local_time_ago(comment.deleted_at || comment.updated_at) %>
+                </span>
+              </li>
+            <% end %>
+          </ul>
+          <% if @destroyable_comments_count > @destroyable_comments.size %>
+            <p class="mt-1 text-xs text-fg-faint">…and <%= @destroyable_comments_count - @destroyable_comments.size %> more.</p>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if admin? && (@destroyable_users_count.positive? || @destroyable_assets_count.positive? || @destroyable_comments_count.positive?) %>
         <%= button_to "Purge eligible now", admin_devops_purge_path, method: :post, class: admin_btn(:danger),
-              data: { turbo_confirm: "Permanently delete every record soft-deleted more than 30 days ago? This cannot be undone." } %>
+              form: { data: { turbo_confirm: "Permanently delete eligible accounts, tracks, and spam/deleted comments older than 30 days? This cannot be undone." } } %>
       <% end %>
     </div>
   </div>

@@ -17,12 +17,33 @@ class Comment < ActiveRecord::Base
   scope :last_5_public,      -> { on_track.with_preloads.only_public.limit(5) }
   scope :made_between,       ->(start, finish) { where('comments.created_at BETWEEN ? AND ?', start, finish) }
   scope :to_other_members,   -> { joins(:user).where("users.current_login_ip != remote_ip").where("commenter_id != user_id") }
+  scope :purgeable_spam_or_deleted, lambda {
+    cutoff = SoftDeletion::GRACE_PERIOD.ago
+    with_deleted.where(
+      'comments.deleted_at < :cutoff OR (comments.is_spam = :spam AND comments.updated_at < :cutoff)',
+      cutoff: cutoff,
+      spam: true
+    )
+  }
 
   def self.with_preloads
     includes(
       commenter: { avatar_image_attachment: :blob },
       commentable: { user: { avatar_image_attachment: :blob } }
     )
+  end
+
+  def self.destroy_spam_or_deleted_older_than_30_days(limit: nil, dry_run: false)
+    scope = purgeable_spam_or_deleted
+    scope = scope.limit(limit) if limit
+    return scope.count if dry_run
+
+    destroyed = 0
+    scope.find_each do |comment|
+      comment.destroy!
+      destroyed += 1
+    end
+    destroyed
   end
 
   has_many :replies, as: :commentable, class_name: 'Comment'
@@ -164,4 +185,5 @@ end
 #  index_comments_on_commentable_type_and_is_spam_and_private  (commentable_type,is_spam,private)
 #  index_comments_on_commenter_id                              (commenter_id)
 #  index_comments_on_deleted_at_and_created_at                 (deleted_at,created_at)
+#  index_comments_on_is_spam_and_updated_at                    (is_spam,updated_at)
 #

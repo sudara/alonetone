@@ -8,9 +8,12 @@ module Admin
       @admin_title = 'Devops'
       @destroyable_users_count = User.destroyable.count
       @destroyable_assets_count = Asset.destroyable.count
+      @destroyable_comments_count = Comment.purgeable_spam_or_deleted.count
       @destroyable_users = User.destroyable.order(deleted_at: :asc).limit(LISTED_DESTROYABLE)
       @destroyable_assets = Asset.destroyable.order(deleted_at: :asc).limit(LISTED_DESTROYABLE)
         .includes(:possibly_deleted_user)
+      @destroyable_comments = Comment.purgeable_spam_or_deleted
+        .order(Arel.sql('COALESCE(comments.deleted_at, comments.updated_at) ASC')).limit(LISTED_DESTROYABLE)
     end
 
     def purge

@@ -1,10 +1,21 @@
 <div class="space-y-6">
   <div class="grid grid-cols-2 gap-4 lg:grid-cols-4">
-    <% [["New users", @stats.new_users], ["New tracks", @stats.new_tracks],
-        ["New comments", @stats.new_comments], ["Listens", @stats.listens]].each do |label, value| %>
+    <% [
+         { label: "New users", value: @stats.new_users, detail: "#{admin_compact_number(@stats.total_users)} total" },
+         { label: "New tracks", value: @stats.new_tracks, detail: "#{admin_compact_number(@stats.total_tracks)} total" },
+         {
+           label: "New comments",
+           value: @stats.new_comments,
+           detail: "#{admin_compact_number(@stats.total_comments)} total · #{admin_compact_number(@stats.new_spam_comments)} spam"
+         },
+         { label: "Listens", value: @stats.listens, detail: "#{admin_compact_number(@stats.total_listens)} total" }
+       ].each do |card| %>
       <div class="rounded-xl border border-border bg-surface-raised p-4">
-        <p class="text-sm text-fg-muted"><%= label %></p>
-        <p class="mt-1 text-2xl font-semibold"><%= number_with_delimiter(value) %></p>
+        <p class="text-sm text-fg-muted"><%= card[:label] %></p>
+        <p class="mt-1 text-2xl font-semibold"><%= number_with_delimiter(card[:value]) %></p>
+        <% if card[:detail] %>
+          <p class="mt-1 text-xs text-fg-faint"><%= card[:detail] %></p>
+        <% end %>
       </div>
     <% end %>
   </div>
