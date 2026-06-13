@@ -1,21 +1,25 @@
-<%= tag.div id: dom_id(comment), class: class_names(
-      "rounded-xl border bg-surface-raised p-4",
-      "border-danger/40" => comment.is_spam?,
-      "border-border" => !comment.is_spam?
-    ) do %>
-  <div class="flex flex-wrap items-center gap-2">
-    <% if comment.commenter %>
-      <%= link_to "@#{comment.commenter.login}", admin_possibly_deleted_user_path(comment.commenter.login), class: "font-semibold text-accent hover:underline" %>
-    <% else %>
-      <span class="font-semibold text-fg-muted">guest</span>
-    <% end %>
-    <% if comment.is_spam? %><span class="rounded-full bg-danger/15 px-2 py-0.5 text-xs font-medium text-danger-hover">spam</span><% end %>
-  </div>
-  <p class="text-xs text-fg-faint">
-    <%= comment.created_at.strftime("%b %d, %Y") %><% if comment.commenter&.email %> · <%= comment.commenter.email %><% end %><% if comment.remote_ip %> · <%= comment.remote_ip %><% end %>
-  </p>
+<% inactive = comment.is_spam? %>
 
-  <p class="mt-2 text-sm text-fg"><%= truncate(comment.body, length: 200) %></p>
+<%= tag.div id: dom_id(comment), class: "rounded-xl border border-border bg-surface-raised p-4" do %>
+  <div class="<%= class_names("space-y-2", "opacity-70" => inactive) %>">
+    <div class="flex flex-wrap items-center gap-2">
+      <% if comment.commenter %>
+        <%= link_to "@#{comment.commenter.login}", admin_possibly_deleted_user_path(comment.commenter.login), class: class_names(
+              "font-semibold hover:underline",
+              "text-accent" => !inactive,
+              "text-fg-muted hover:text-fg" => inactive
+            ) %>
+      <% else %>
+        <span class="font-semibold text-fg-muted">guest</span>
+      <% end %>
+      <% if comment.is_spam? %><span class="rounded-full bg-surface-overlay px-2 py-0.5 text-xs text-fg-muted">spam</span><% end %>
+    </div>
+    <p class="text-xs text-fg-faint">
+      <%= comment.created_at.strftime("%b %d, %Y") %><% if comment.commenter&.email %> · <%= comment.commenter.email %><% end %><% if comment.remote_ip %> · <%= comment.remote_ip %><% end %>
+    </p>
+
+    <p class="text-sm text-fg"><%= truncate(comment.body, length: 200) %></p>
+  </div>
 
   <% unless comment.commenter&.soft_deleted? %>
     <div class="mt-3">

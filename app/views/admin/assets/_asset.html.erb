@@ -1,18 +1,20 @@
-<%= tag.div id: dom_id(asset), class: class_names(
-      "rounded-xl border bg-surface-raised p-4",
-      "border-danger/40" => asset.is_spam?,
-      "border-border" => !asset.is_spam?
-    ) do %>
-  <div class="flex min-w-0 gap-3">
+<% inactive = asset.is_spam? || asset.soft_deleted? %>
+
+<%= tag.div id: dom_id(asset), class: "rounded-xl border border-border bg-surface-raised p-4" do %>
+  <div class="<%= class_names("flex min-w-0 gap-3", "opacity-70" => inactive) %>">
     <div class="size-10 shrink-0 overflow-hidden rounded-full bg-surface-overlay"><%= user_image(asset.possibly_deleted_user, variant: :large_avatar) %></div>
     <div class="min-w-0 flex-1">
       <div class="flex flex-wrap items-center gap-2">
         <% if asset.possibly_deleted_user %>
-          <%= link_to asset.title, user_track_path(asset.possibly_deleted_user, asset.permalink), class: "truncate font-semibold text-accent hover:underline" %>
+          <%= link_to asset.title, user_track_path(asset.possibly_deleted_user, asset.permalink), class: class_names(
+                "truncate font-semibold hover:underline",
+                "text-accent" => !inactive,
+                "text-fg-muted hover:text-fg" => inactive
+              ) %>
         <% else %>
-          <span class="truncate font-semibold"><%= asset.title %></span>
+          <span class="<%= class_names("truncate font-semibold", "text-fg-muted" => inactive) %>"><%= asset.title %></span>
         <% end %>
-        <% if asset.is_spam? %><span class="rounded-full bg-danger/15 px-2 py-0.5 text-xs font-medium text-danger-hover">spam</span><% end %>
+        <% if asset.is_spam? %><span class="rounded-full bg-surface-overlay px-2 py-0.5 text-xs text-fg-muted">spam</span><% end %>
         <% if asset.soft_deleted? %><span class="rounded-full bg-surface-overlay px-2 py-0.5 text-xs text-fg-muted">deleted</span><% end %>
       </div>
       <p class="truncate text-sm text-fg-muted">
@@ -30,22 +32,22 @@
   </div>
 
   <% if asset.description.present? %>
-    <p class="mt-2 line-clamp-2 text-sm text-fg-muted"><%= truncate(asset.description, length: 120) %></p>
+    <p class="<%= class_names("mt-2 line-clamp-2 text-sm text-fg-muted", "opacity-70" => inactive) %>"><%= truncate(asset.description, length: 120) %></p>
   <% end %>
 
   <% unless asset.possibly_deleted_user&.soft_deleted? %>
     <div class="mt-3 flex flex-wrap gap-2">
       <% if asset.soft_deleted? %>
-        <%= button_to "Restore", restore_admin_asset_path(id: asset.id, row: true), method: :put, class: admin_btn(:neutral) %>
+        <%= button_to "Restore", restore_admin_asset_path(id: asset.id, row: true), method: :put, class: admin_btn(:success) %>
         <% if asset.perma_deletable? %>
           <%= button_to "Permanently delete", purge_admin_asset_path(asset.id), method: :delete, class: admin_btn(:danger),
-                data: { turbo_confirm: "Permanently delete \"#{asset.title}\"? This cannot be undone." } %>
+                form: { data: { turbo_confirm: "Permanently delete \"#{asset.title}\"? This cannot be undone." } } %>
         <% end %>
       <% else %>
         <%= button_to "Spam", spam_admin_asset_path(id: asset.id, row: true), method: :put, class: admin_btn(:neutral),
-              data: { turbo_confirm: "Mark \"#{asset.title}\" as spam? This also hides it from the site." } %>
+              form: { data: { turbo_confirm: "Mark \"#{asset.title}\" as spam? This also hides it from the site." } } %>
         <%= button_to "Delete", delete_admin_asset_path(id: asset.id, row: true), method: :put, class: admin_btn(:neutral),
-              data: { turbo_confirm: "Delete \"#{asset.title}\"? It can be restored for 30 days." } %>
+              form: { data: { turbo_confirm: "Delete \"#{asset.title}\"? It can be restored for 30 days." } } %>
       <% end %>
     </div>
   <% end %>

@@ -313,5 +313,25 @@ RSpec.describe Admin::AssetsController, type: :request do
       get admin_assets_path(filter_by: :deleted)
       expect(response.body).to match(/Deleted/)
     end
+
+    it "mutes spam rows without a danger border" do
+      get admin_assets_path(filter_by: :is_spam)
+
+      doc = Nokogiri::HTML(response.body)
+      row = doc.at_css("#asset_#{spam_track.id}")
+      expect(row['class']).not_to include('border-danger')
+      expect(row.at_css('.opacity-70')).to be_present
+      expect(row.text).to include('spam')
+    end
+
+    it "uses success styling for restore actions" do
+      AssetCommand.new(soft_deleted_asset).soft_delete_with_relations
+      get admin_assets_path(filter_by: :deleted)
+
+      doc = Nokogiri::HTML(response.body)
+      row = doc.at_css("#asset_#{soft_deleted_asset.id}")
+      restore_button = row.at_css('input[type="submit"][value="Restore"]')
+      expect(restore_button['class']).to include('bg-success')
+    end
   end
 end

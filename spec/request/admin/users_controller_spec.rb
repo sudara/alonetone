@@ -37,10 +37,16 @@ RSpec.describe Admin::UsersController, type: :request do
 
     let!(:user) { users(:arthur) }
 
-    it "should unspam the user" do
+    it "should mark the user as spam" do
       akismet_stub_submit_spam
       put spam_admin_user_path(user.login)
       expect(user.reload.is_spam).to eq(true)
+    end
+
+    it "should soft-delete the user" do
+      akismet_stub_submit_spam
+      put spam_admin_user_path(user.login)
+      expect(user.reload.deleted_at).to be_present
     end
 
     it "should update RAKISMET with updated information about user" do
@@ -268,6 +274,37 @@ RSpec.describe Admin::UsersController, type: :request do
         expect(response.body).to include('row=true')
       end
     end
+
+    it "labels the shared-login-IP spam action as accounts and puts confirmation on the form" do
+      users(:arthur).update!(current_login_ip: '203.0.113.8')
+      users(:aaron).update!(current_login_ip: '203.0.113.8')
+
+      get admin_users_path
+
+      doc = Nokogiri::HTML(response.body)
+      form = doc.at_css('form[data-turbo-confirm*="Mark all 2 accounts"]')
+      expect(form).to be_present
+      expect(form.at_css('input[type="submit"]')['value']).to eq('Spam all 2 accounts')
+    end
+
+    it "mutes spam rows without a danger border" do
+      get admin_users_path(filter_by: :is_spam)
+
+      doc = Nokogiri::HTML(response.body)
+      row = doc.at_css("#user_#{users(:aaron).id}")
+      expect(row['class']).not_to include('border-danger')
+      expect(row.at_css('.opacity-70')).to be_present
+      expect(row.text).to include('spam')
+    end
+
+    it "uses success styling for restore actions" do
+      get admin_users_path(filter_by: :deleted)
+
+      doc = Nokogiri::HTML(response.body)
+      row = doc.at_css("#user_#{users(:arthur).id}")
+      restore_button = row.at_css('input[type="submit"][value="Restore"]')
+      expect(restore_button['class']).to include('bg-success')
+    end
   end
 
   describe '#show' do
@@ -278,6 +315,11 @@ RSpec.describe Admin::UsersController, type: :request do
 
       it 'should display user information' do
         expect(response.body).to match(/sudara/)
+      end
+
+      it 'links to the public profile' do
+        expect(response.body).to include(user_home_path(users(:sudara)))
+        expect(response.body).to include('public profile')
       end
 
       it 'should display users assets' do

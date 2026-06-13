@@ -55,4 +55,18 @@ RSpec.describe Admin::CommentsController, type: :request do
       expect(response.body).to include(%(target="comment_#{comment.id}"))
     end
   end
+
+  describe "#index" do
+    it "mutes spam rows without a danger border" do
+      comment = comments(:public_spam_comment_on_asset_by_user)
+
+      get admin_comments_path
+
+      doc = Nokogiri::HTML(response.body)
+      row = doc.at_css("#comment_#{comment.id}")
+      expect(row['class']).not_to include('border-danger')
+      expect(row.at_css('.opacity-70')).to be_present
+      expect(row.text).to include('spam')
+    end
+  end
 end
