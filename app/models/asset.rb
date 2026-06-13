@@ -28,7 +28,7 @@ class Asset < ApplicationRecord
   scope :with_preloads,   -> { includes(user: { avatar_image_attachment: :blob }) }
 
   belongs_to :user
-  after_commit :update_user_assets_count, on: :create
+  after_commit :record_user_upload, on: :create
 
   belongs_to :possibly_deleted_user,
     -> { with_deleted },
@@ -45,6 +45,21 @@ class Asset < ApplicationRecord
   has_many :listeners,
     -> { distinct.order('listens.created_at DESC') },
     through: :listens
+
+  def recent_listeners(limit: 6)
+    recent_listens = Listen
+      .from('listens FORCE INDEX(index_listens_on_asset_deleted_listener_created)')
+      .select('listens.listener_id, MAX(listens.created_at) AS last_listened_at')
+      .where(asset_id: id)
+      .where.not(listener_id: nil)
+      .group(:listener_id)
+
+    User
+      .joins("INNER JOIN (#{recent_listens.to_sql}) recent_listens " \
+        'ON recent_listens.listener_id = users.id')
+      .order(Arel.sql('recent_listens.last_listened_at DESC'))
+      .limit(limit)
+  end
 
   has_many :favoriters,
     -> { where('tracks.is_favorite' => true).order('tracks.created_at DESC') },
@@ -232,8 +247,19 @@ class Asset < ApplicationRecord
     end
   end
 
-  def update_user_assets_count
-    user.increment!(:assets_count, touch: true)
+  def record_user_upload
+    uploaded_at = created_at || Time.current
+
+    User.where(id: user_id).update_all(
+      [
+        'assets_count = assets_count + 1, ' \
+        'last_uploaded_at = CASE WHEN last_uploaded_at IS NULL OR last_uploaded_at < ? ' \
+        'THEN ? ELSE last_uploaded_at END, updated_at = ?',
+        uploaded_at,
+        uploaded_at,
+        Time.current
+      ]
+    )
   end
 end
 

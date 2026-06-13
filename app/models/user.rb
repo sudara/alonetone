@@ -221,6 +221,10 @@ class User < ApplicationRecord
     listens.count > n
   end
 
+  def refresh_last_uploaded_at!
+    update_column(:last_uploaded_at, Asset.where(user_id: id).maximum(:created_at))
+  end
+
   def hasnt_been_here_in(hours)
     last_login_at &&
       last_login_at < hours.ago.utc
@@ -377,6 +381,7 @@ end
 #  last_login_at     :datetime
 #  last_login_ip     :string(255)
 #  last_request_at   :datetime
+#  last_uploaded_at  :datetime
 #  listens_count     :integer          default(0)
 #  login             :string(40)
 #  login_count       :integer          default(0), not null
@@ -394,5 +399,6 @@ end
 #
 #  index_users_on_current_login_ip_and_deleted_at  (current_login_ip,deleted_at)
 #  index_users_on_deleted_at_and_created_at        (deleted_at,created_at)
+#  index_users_on_deleted_at_and_last_uploaded_at  (deleted_at,last_uploaded_at)
 #  index_users_on_updated_at                       (updated_at)
 #

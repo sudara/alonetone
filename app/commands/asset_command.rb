@@ -9,12 +9,13 @@ class AssetCommand
   def soft_delete_with_relations
     time = Time.now
     # first update playlists
-    asset.user.decrement!(:assets_count, touch: true)
     asset.playlists.update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now]) unless asset.playlists.empty?
     asset.comments.update_all(deleted_at: time)
     asset.tracks.update_all(deleted_at: time)
     asset.listens.update_all(deleted_at: time)
     asset.soft_delete
+    asset.user.decrement!(:assets_count, touch: true)
+    asset.user.refresh_last_uploaded_at!
   end
 
   def restore_with_relations
@@ -22,6 +23,7 @@ class AssetCommand
 
     asset.restore
     asset.user.increment!(:assets_count, touch: true)
+    asset.user.refresh_last_uploaded_at!
     asset.playlists.with_deleted.update_all(['tracks_count = tracks_count + 1, playlists.updated_at = ?', Time.now]) unless asset.playlists.with_deleted.empty?
     asset.comments.with_deleted.update_all(deleted_at: nil)
     asset.tracks.with_deleted.update_all(deleted_at: nil)

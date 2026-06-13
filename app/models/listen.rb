@@ -28,9 +28,14 @@ class Listen < ActiveRecord::Base
   end
 
   def self.most_active_ips(limit = 25)
-    Listen.where('created_at > ?', 30.days.ago)
-      .order('count_all DESC')
-      .group(:ip).limit(limit).count
+    top_ips(limit: limit, range: 30.days.ago..Time.current)
+  end
+
+  def self.top_ips(limit: 25, range: nil)
+    index = range ? 'index_listens_on_created_at_and_ip' : 'index_listens_on_ip'
+    scope = with_deleted.from("listens FORCE INDEX(#{index})").where.not(ip: nil)
+    scope = scope.where(created_at: range) if range
+    scope.group(:ip).order('count_all DESC').limit(limit).count
   end
 
   def self.most_active_tracks(limit = 25)
@@ -86,8 +91,11 @@ end
 #
 # Indexes
 #
+#  index_listens_on_asset_deleted_listener_created          (asset_id,deleted_at,listener_id,created_at)
 #  index_listens_on_asset_id                                (asset_id)
+#  index_listens_on_asset_ip_deleted_created                (asset_id,ip,deleted_at,created_at)
 #  index_listens_on_created_at                              (created_at)
+#  index_listens_on_created_at_and_ip                       (created_at,ip)
 #  index_listens_on_deleted_at_and_created_at_and_asset_id  (deleted_at,created_at,asset_id)
 #  index_listens_on_deleted_at_and_created_at_and_ip        (deleted_at,created_at,ip)
 #  index_listens_on_ip                                      (ip)

@@ -63,10 +63,7 @@ class User < ApplicationRecord
       end
 
       def last_uploaded
-        subquery = select('users.*, max(assets.created_at) as last_uploaded_at')
-          .joins(:assets) # could be left_joins if we needed users with no assets
-          .group('users.id')
-        from(subquery, :users).order('last_uploaded_at desc')
+        where.not(last_uploaded_at: nil).reorder(last_uploaded_at: :desc, id: :desc)
       end
 
       def dedicated_listeners

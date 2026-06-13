@@ -46,7 +46,10 @@ module Listens
   end
 
   def ip_just_registered_this_listen?(asset)
-    last_listen = asset.listens.since(1.week.ago).where(ip: request.remote_ip).first
-    last_listen.present? && (last_listen.created_at > (Time.now - asset[:length]))
+    cutoff = [1.week.ago, Time.current - asset[:length]].max
+    Listen.from('listens FORCE INDEX(index_listens_on_asset_ip_deleted_created)')
+      .where(asset_id: asset.id, ip: request.remote_ip)
+      .where('listens.created_at > ?', cutoff)
+      .exists?
   end
 end

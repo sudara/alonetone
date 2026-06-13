@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_10_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_13_130000) do
   create_table "account_requests", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.text "details"
@@ -193,7 +193,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_10_120000) do
     t.integer "track_owner_id"
     t.datetime "updated_at"
     t.string "user_agent"
+    t.index ["asset_id", "deleted_at", "listener_id", "created_at"], name: "index_listens_on_asset_deleted_listener_created"
+    t.index ["asset_id", "ip", "deleted_at", "created_at"], name: "index_listens_on_asset_ip_deleted_created"
     t.index ["asset_id"], name: "index_listens_on_asset_id"
+    t.index ["created_at", "ip"], name: "index_listens_on_created_at_and_ip"
     t.index ["created_at"], name: "index_listens_on_created_at"
     t.index ["deleted_at", "created_at", "asset_id"], name: "index_listens_on_deleted_at_and_created_at_and_asset_id"
     t.index ["deleted_at", "created_at", "ip"], name: "index_listens_on_deleted_at_and_created_at_and_ip"
@@ -607,6 +610,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_10_120000) do
     t.datetime "last_login_at"
     t.string "last_login_ip"
     t.datetime "last_request_at"
+    t.datetime "last_uploaded_at"
     t.integer "listens_count", default: 0
     t.string "login", limit: 40
     t.integer "login_count", default: 0, null: false
@@ -619,6 +623,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_10_120000) do
     t.datetime "updated_at"
     t.index ["current_login_ip", "deleted_at"], name: "index_users_on_current_login_ip_and_deleted_at"
     t.index ["deleted_at", "created_at"], name: "index_users_on_deleted_at_and_created_at"
+    t.index ["deleted_at", "last_uploaded_at"], name: "index_users_on_deleted_at_and_last_uploaded_at"
     t.index ["updated_at"], name: "index_users_on_updated_at"
   end
 

@@ -55,6 +55,39 @@ RSpec.describe User, type: :model do
         end
       end.to perform_queries(count: 4)
     end
+
+    it 'orders last uploaded users by the cached upload timestamp' do
+      User.with_deleted.update_all(last_uploaded_at: nil)
+      older_user = users(:sudara)
+      newer_user = users(:arthur)
+      older_user.update_columns(last_uploaded_at: 2.days.ago)
+      newer_user.update_columns(last_uploaded_at: 1.day.ago)
+
+      expect(User.paginate_by_params({ sort: 'last_uploaded' }).limit(2).to_a).to eq(
+        [newer_user, older_user]
+      )
+    end
+
+    it 'does not join assets to sort last uploaded users' do
+      sql = User.paginate_by_params({ sort: 'last_uploaded' }).to_sql
+
+      expect(sql).to include('last_uploaded_at')
+      expect(sql).not_to include('JOIN `assets`')
+    end
+  end
+
+  describe '#refresh_last_uploaded_at!' do
+    it 'stores the latest active asset timestamp' do
+      user = users(:jamie_kiesl)
+      latest_asset = assets(:valid_asset_to_test_on_latest)
+      previous_asset = assets(:another_valid_asset_to_test_on_latest)
+      latest_asset.update_columns(deleted_at: 1.minute.ago)
+
+      expect {
+        user.refresh_last_uploaded_at!
+      }.to change { user.reload.last_uploaded_at&.to_i }
+        .to(previous_asset.created_at.to_i)
+    end
   end
 
   context "validation" do
