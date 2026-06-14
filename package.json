@@ -15,7 +15,7 @@
     "@hotwired/turbo-rails": "^8.0.23",
     "chart.js": "^4.5.1",
     "chartkick": "^5.0.1",
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.28.1",
     "gsap": "^3.11.4",
     "local-time": "^2.1.0",
     "seedrandom": "^3.0.5",
