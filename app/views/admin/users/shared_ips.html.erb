@@ -14,8 +14,12 @@
           </div>
         </div>
         <p class="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-sm">
-          <% @users_by_ip.fetch(ip, []).each do |user| %>
+          <% previewed_users = @users_by_ip.fetch(ip, []) %>
+          <% previewed_users.each do |user| %>
             <%= link_to user.login, admin_possibly_deleted_user_path(user.login), class: "text-accent hover:underline" %>
+          <% end %>
+          <% if count > previewed_users.size %>
+            <span class="text-fg-faint">and <%= pluralize(count - previewed_users.size, 'more account') %></span>
           <% end %>
         </p>
       </div>

@@ -23,13 +23,14 @@ RSpec.describe 'Admin stat views', type: :request do
     expect(response.body).not_to include('botsvsbrowsers')
   end
 
-  it 'lists every account for a shared IP' do
+  it 'caps the account preview for a shared IP' do
     sharers = User.order(:id).limit(7)
     sharers.update_all(current_login_ip: '203.0.113.50')
     get admin_shared_ips_path
     listed = sharers.count { |user| response.body.include?("possibly_deleted_user/#{user.login}") }
-    expect(listed).to eq(7)
+    expect(listed).to eq(6)
     expect(response.body).to include('7 accounts')
+    expect(response.body).to include('and 1 more account')
   end
 
   it 'shows the total track count for accounts sharing an IP' do

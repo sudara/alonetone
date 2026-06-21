@@ -1,5 +1,7 @@
 module Admin
   class UsersController < Admin::BaseController
+    SHARED_IP_PREVIEW_LIMIT = 6
+
     before_action :set_user, except: %i[index shared_ips bandwidth]
     before_action :admin_only, only: %i[purge]
 
@@ -15,8 +17,7 @@ module Admin
         .where.not(current_login_ip: nil).having('COUNT(*) > 1').limit(25).count
       @track_counts_by_ip = User.with_deleted.where(current_login_ip: @shared_ips.keys)
         .group(:current_login_ip).sum(:assets_count)
-      @users_by_ip = User.with_deleted.where(current_login_ip: @shared_ips.keys)
-        .with_preloads.order(:id).group_by(&:current_login_ip)
+      @users_by_ip = users_by_shared_ip_preview(@shared_ips.keys)
     end
 
     def bandwidth
@@ -105,6 +106,17 @@ module Admin
 
     def permitted_params
       params.permit(:filter_by)
+    end
+
+    def users_by_shared_ip_preview(ips)
+      return {} if ips.empty?
+
+      ranked = User.with_deleted
+        .select('users.*', 'ROW_NUMBER() OVER (PARTITION BY current_login_ip ORDER BY id) AS ip_rank')
+        .where(current_login_ip: ips)
+
+      User.with_deleted.from(ranked, :users).where('ip_rank <= ?', SHARED_IP_PREVIEW_LIMIT)
+        .with_preloads.order(:current_login_ip, :id).group_by(&:current_login_ip)
     end
 
     def user_soft_deleted_location(fallback_filter)
