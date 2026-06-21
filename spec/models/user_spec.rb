@@ -12,6 +12,11 @@ RSpec.describe User, type: :model do
       User.destroy_deleted_older_than_30_days
       expect(User.with_deleted.where(login: 'deleted_yesterday').first).to be_present
     end
+
+    it 'keeps the old cron-facing method name as an alias' do
+      expect(User.destroy_deleted_accounts_older_than_30_days(dry_run: true))
+        .to eq(User.destroy_deleted_older_than_30_days(dry_run: true))
+    end
   end
 
   describe 'authlogic setup' do

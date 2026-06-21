@@ -13,6 +13,11 @@ RSpec.describe Asset, type: :model do
     )
   end
 
+  it 'keeps the old cron-facing purge method name as an alias' do
+    expect(Asset.destroy_deleted_accounts_older_than_30_days(dry_run: true))
+      .to eq(Asset.destroy_deleted_older_than_30_days(dry_run: true))
+  end
+
   context "asset with audio file" do
     let(:asset) { assets(:will_studd_rockfort_combalou) }
 

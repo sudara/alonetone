@@ -189,6 +189,10 @@ class User < ApplicationRecord
     destroyed
   end
 
+  def self.destroy_deleted_accounts_older_than_30_days(**options)
+    destroy_deleted_older_than_30_days(**options)
+  end
+
   def self.with_same_ip_as(user)
     User.where(current_login_ip: user.current_login_ip).where('id != ?', user.id)
   end

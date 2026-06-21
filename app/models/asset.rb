@@ -230,6 +230,10 @@ class Asset < ApplicationRecord
     destroyed
   end
 
+  def self.destroy_deleted_accounts_older_than_30_days(**options)
+    destroy_deleted_older_than_30_days(**options)
+  end
+
   def self.filter_by(filter)
     case filter
     when "deleted"
