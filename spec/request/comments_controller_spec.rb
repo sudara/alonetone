@@ -353,13 +353,15 @@ RSpec.describe CommentsController, type: :request do
           user: users(:arthur),
           commenter: users(:henri_willig),
           body: "spam pagination #{i}",
-          is_spam: true
+          is_spam: true,
+          deleted_at: Time.current
         )
       end
 
       get "/comments"
 
       expect(response.body).to include("page_spam=2")
+      expect(response.body).to include("spam pagination 20")
     end
 
     it "is not visible to receiver of the private comment" do

@@ -9,7 +9,7 @@ module Admin
     def new_users = scoped(User).count
     def new_tracks = scoped(Asset).count
     def new_comments = scoped(Comment).where(is_spam: false).count
-    def new_spam_comments = scoped(Comment).where(is_spam: true).count
+    def new_spam_comments = scoped(Comment.with_deleted).where(is_spam: true).count
     def total_users = User.count
     def total_tracks = Asset.count
     def total_comments = Comment.where(is_spam: false).count
@@ -36,7 +36,7 @@ module Admin
     def waiting_account_requests = AccountRequest.waiting.count
     def spam_users = User.with_deleted.where(is_spam: true).count
     def spam_tracks = Asset.with_deleted.where(is_spam: true).count
-    def spam_comments = Comment.where(is_spam: true).count
+    def spam_comments = Comment.with_deleted.where(is_spam: true).count
     def perma_deletable = User.destroyable.count + Asset.destroyable.count + Comment.destroyable.count
 
     private

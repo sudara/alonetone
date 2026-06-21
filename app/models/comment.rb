@@ -11,7 +11,7 @@ class Comment < ActiveRecord::Base
   scope :by_member,          -> { recent.where('commenter_id IS NOT NULL') }
   scope :include_private,    -> { recent.where(is_spam: false) }
   scope :public_or_private,  ->(has_access) { has_access ? include_private : only_public }
-  scope :spam,               -> { recent.where(is_spam: true) }
+  scope :spam,               -> { with_deleted.recent.where(is_spam: true) }
   scope :on_track,           -> { where(commentable_type: 'Asset') }
   scope :last_5_private,     -> { on_track.with_preloads.include_private.limit(5) }
   scope :last_5_public,      -> { on_track.with_preloads.only_public.limit(5) }

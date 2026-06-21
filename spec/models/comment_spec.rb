@@ -178,4 +178,13 @@ RSpec.describe Comment, type: :model do
       expect(receiver.reload.comments_count).to eq(expected_receiver)
     end
   end
+
+  describe '.spam' do
+    it 'includes soft-deleted spam comments for moderation queues' do
+      comment = Comment.create!(commentable: assets(:valid_mp3), commenter: users(:arthur), body: 'hidden spam',
+        is_spam: true, deleted_at: 1.hour.ago)
+
+      expect(Comment.spam).to include(comment)
+    end
+  end
 end
