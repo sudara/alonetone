@@ -330,7 +330,7 @@ RSpec.describe Admin::AssetsController, type: :request do
 
       doc = Nokogiri::HTML(response.body)
       row = doc.at_css("#asset_#{soft_deleted_asset.id}")
-      restore_button = row.at_css('input[type="submit"][value="Restore"]')
+      restore_button = row.css('button[type="submit"]').find { |b| b.text.strip == 'Restore' }
       expect(restore_button['class']).to include('bg-success')
     end
   end

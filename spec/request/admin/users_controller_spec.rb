@@ -276,15 +276,15 @@ RSpec.describe Admin::UsersController, type: :request do
     end
 
     it "labels the shared-login-IP spam action as accounts and puts confirmation on the form" do
-      users(:arthur).update!(current_login_ip: '203.0.113.8')
-      users(:aaron).update!(current_login_ip: '203.0.113.8')
+      users(:arthur).update!(deleted_at: nil, is_spam: false, current_login_ip: '203.0.113.8')
+      users(:aaron).update!(is_spam: false, current_login_ip: '203.0.113.8')
 
       get admin_users_path
 
       doc = Nokogiri::HTML(response.body)
       form = doc.at_css('form[data-turbo-confirm*="Mark all 2 accounts"]')
       expect(form).to be_present
-      expect(form.at_css('input[type="submit"]')['value']).to eq('Spam all 2 accounts')
+      expect(form.at_css('button[type="submit"]').text.strip).to eq('Spam all 2 accounts')
     end
 
     it "mutes spam rows without a danger border" do
@@ -302,7 +302,7 @@ RSpec.describe Admin::UsersController, type: :request do
 
       doc = Nokogiri::HTML(response.body)
       row = doc.at_css("#user_#{users(:arthur).id}")
-      restore_button = row.at_css('input[type="submit"][value="Restore"]')
+      restore_button = row.css('button[type="submit"]').find { |b| b.text.strip == 'Restore' }
       expect(restore_button['class']).to include('bg-success')
     end
   end
