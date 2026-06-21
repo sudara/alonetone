@@ -137,13 +137,12 @@ RSpec.describe Admin::DashboardStats do
     subject(:stats) { described_class.new(range: nil, bucket: :month, range_key: 'all') }
 
     it 'reports spam and purge-eligible counts' do
-      Comment.create!(commentable: assets(:valid_mp3), commenter: users(:arthur), body: 'old spam',
-        is_spam: true, updated_at: 40.days.ago)
+      comments(:public_comment_on_asset_by_user).update_columns(deleted_at: 40.days.ago)
 
       expect(stats.spam_tracks).to eq(Asset.with_deleted.where(is_spam: true).count)
       expect(stats.spam_comments).to eq(Comment.where(is_spam: true).count)
       expect(stats.perma_deletable).to eq(
-        User.destroyable.count + Asset.destroyable.count + Comment.purgeable_spam_or_deleted.count
+        User.destroyable.count + Asset.destroyable.count + Comment.destroyable.count
       )
     end
   end

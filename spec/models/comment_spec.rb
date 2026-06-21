@@ -135,4 +135,47 @@ RSpec.describe Comment, type: :model do
       end
     end
   end
+
+  describe 'cached comment counts' do
+    let(:counted_asset) { assets(:valid_mp3) }
+    let(:receiver) { counted_asset.user }
+
+    it 'increments on create and decrements when a live comment is destroyed' do
+      comment = nil
+      expect { comment = Comment.create!(commentable: counted_asset, commenter: users(:arthur), body: 'nice one') }
+        .to change { counted_asset.reload.comments_count }.by(1)
+        .and change { receiver.reload.comments_count }.by(1)
+
+      expect { comment.destroy }
+        .to change { counted_asset.reload.comments_count }.by(-1)
+        .and change { receiver.reload.comments_count }.by(-1)
+    end
+
+    it 'leaves counts untouched for spam comments' do
+      comment = Comment.create!(commentable: counted_asset, commenter: users(:arthur), body: 'spammy', is_spam: true)
+      expect { comment.destroy }.not_to change { counted_asset.reload.comments_count }
+    end
+
+    it 'does not decrement again when destroying an already soft-deleted comment' do
+      comment = Comment.create!(commentable: counted_asset, commenter: users(:arthur), body: 'nice one')
+      comment.update_columns(deleted_at: 1.hour.ago)
+
+      expect { comment.destroy }.not_to change { counted_asset.reload.comments_count }
+    end
+
+    it 'recomputes drifted counts from the live, non-spam comments' do
+      Comment.create!(commentable: counted_asset, commenter: users(:arthur), body: 'counts')
+      Comment.create!(commentable: counted_asset, commenter: users(:arthur), body: 'spam, ignored', is_spam: true)
+      expected_asset = counted_asset.comments.where(is_spam: false).count
+      expected_receiver = Comment.where(user_id: receiver.id, is_spam: false, commentable_type: 'Asset').count
+
+      counted_asset.update_columns(comments_count: 999)
+      receiver.update_columns(comments_count: 999)
+
+      Comment.recompute_cached_counts!
+
+      expect(counted_asset.reload.comments_count).to eq(expected_asset)
+      expect(receiver.reload.comments_count).to eq(expected_receiver)
+    end
+  end
 end

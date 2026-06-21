@@ -176,7 +176,7 @@ class User < ApplicationRecord
     !active? ? clear_token! : false
   end
 
-  def self.destroy_deleted_accounts_older_than_30_days(limit: nil, dry_run: false)
+  def self.destroy_deleted_older_than_30_days(limit: nil, dry_run: false)
     scope = User.destroyable
     scope = scope.limit(limit) if limit
     return scope.count if dry_run

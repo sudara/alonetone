@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
     @comment.is_spam = @comment.spam? # makes api request
     @comment.spam_if_banned_words! # immediate flag based on terms
     if !@comment.abuse_from_guest? && @comment.save
+      @comment.soft_delete if @comment.is_spam?
       CommentNotification.new_comment(@comment, @comment.commentable).deliver_now if @comment.is_deliverable?
       head :created, location: @comment
     else
@@ -22,15 +23,13 @@ class CommentsController < ApplicationController
   end
 
   def unspam
-    @comment.ham!
-    @comment.update_attribute :is_spam, false
+    CommentCommand.new(@comment).unspam_and_restore
     flash[:ok] = 'We un-spammed and made that comment public'
     redirect_back(fallback_location: root_path, status: :see_other)
   end
 
   def spam
-    @comment.spam!
-    @comment.update_attribute :is_spam, true
+    CommentCommand.new(@comment).spam_and_soft_delete
     flash[:ok] = 'We marked that comment as spam'
     redirect_back(fallback_location: root_path, status: :see_other)
   end
@@ -56,7 +55,7 @@ class CommentsController < ApplicationController
   end
 
   def find_comment
-    @comment = Comment.where(id: params[:id]).first
+    @comment = Comment.with_deleted.where(id: params[:id]).first
   end
 
   def set_spam_comments

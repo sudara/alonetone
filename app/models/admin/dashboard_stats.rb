@@ -37,7 +37,7 @@ module Admin
     def spam_users = User.with_deleted.where(is_spam: true).count
     def spam_tracks = Asset.with_deleted.where(is_spam: true).count
     def spam_comments = Comment.where(is_spam: true).count
-    def perma_deletable = User.destroyable.count + Asset.destroyable.count + Comment.purgeable_spam_or_deleted.count
+    def perma_deletable = User.destroyable.count + Asset.destroyable.count + Comment.destroyable.count
 
     private
 

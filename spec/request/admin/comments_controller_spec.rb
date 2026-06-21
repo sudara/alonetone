@@ -8,12 +8,33 @@ RSpec.describe Admin::CommentsController, type: :request do
   describe "spam for individual comments" do
     let(:comment) { comments(:valid_comment_on_asset_by_guest) }
 
-    it "should mark comments as spam" do
+    it "should mark comments as spam and soft-delete them" do
       akismet_stub_submit_spam
       expect(comment.is_spam).to eq(false)
       put "/admin/comments/#{comment.id}/spam"
-      comment.reload
-      expect(comment.is_spam).to eq(true)
+      spammed = Comment.with_deleted.find(comment.id)
+      expect(spammed.is_spam).to eq(true)
+      expect(spammed.soft_deleted?).to be(true)
+    end
+
+    it "decrements the cached comment counts" do
+      akismet_stub_submit_spam
+      asset = comment.commentable
+      receiver = asset.user
+      expect { put spam_admin_comment_path(comment.id) }
+        .to change { receiver.reload.comments_count }.by(-1)
+        .and change { asset.reload.comments_count }.by(-1)
+    end
+
+    it "keeps soft-deleted spam under the spam filter but out of the default list" do
+      akismet_stub_submit_spam
+      put spam_admin_comment_path(comment.id)
+
+      get admin_comments_path(filter_by: 'is_spam')
+      expect(response.body).to include("comment_#{comment.id}")
+
+      get admin_comments_path
+      expect(response.body).not_to include("comment_#{comment.id}")
     end
 
     it "should update RAKISMET" do

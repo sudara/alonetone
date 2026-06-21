@@ -21,8 +21,8 @@ RSpec.describe CommentsController, type: :request do
             'user-agent' => 'webkit'
           }
         )
-      end.to change(Comment, :count)
-      expect(Comment.last.is_spam).to be true
+      end.to change(Comment.with_deleted, :count)
+      expect(Comment.with_deleted.last.is_spam).to be true
     end
 
     it "should allow one banned word" do
@@ -52,9 +52,10 @@ RSpec.describe CommentsController, type: :request do
       params = { comment: { body: "anything", private: "0", commentable_type: "Asset", commentable_id: asset.id } }
       expect do
         post "/comments", params: params, headers: { 'x-forwarded-for' => '8.8.8.8', 'user-agent' => 'webkit' }
-      end.to change(Comment, :count).by(1)
+      end.to change(Comment.with_deleted, :count).by(1)
       expect(response).to have_http_status(201)
-      expect(Comment.last.is_spam).to be true
+      expect(Comment.with_deleted.last.is_spam).to be true
+      expect(Comment.with_deleted.last.soft_deleted?).to be true
     end
   end
 
@@ -427,7 +428,7 @@ RSpec.describe CommentsController, type: :request do
       comment = comments(:public_comment_on_asset_by_user)
       put spam_user_track_comment_path(users(:arthur), comment.commentable, comment)
       expect(response).to have_http_status(303)
-      expect(Comment.find(comment.id).is_spam).to be true
+      expect(Comment.with_deleted.find(comment.id).is_spam).to be true
       expect(flash[:ok]).to eq('We marked that comment as spam')
     end
 

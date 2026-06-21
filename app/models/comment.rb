@@ -17,14 +17,13 @@ class Comment < ActiveRecord::Base
   scope :last_5_public,      -> { on_track.with_preloads.only_public.limit(5) }
   scope :made_between,       ->(start, finish) { where('comments.created_at BETWEEN ? AND ?', start, finish) }
   scope :to_other_members,   -> { joins(:user).where("users.current_login_ip != remote_ip").where("commenter_id != user_id") }
-  scope :purgeable_spam_or_deleted, lambda {
-    cutoff = SoftDeletion::GRACE_PERIOD.ago
-    with_deleted.where(
-      'comments.deleted_at < :cutoff OR (comments.is_spam = :spam AND comments.updated_at < :cutoff)',
-      cutoff: cutoff,
-      spam: true
-    )
-  }
+
+  def self.filter_by(filter)
+    case filter
+    when 'is_spam' then with_deleted.where(is_spam: true).recent
+    else recent
+    end
+  end
 
   def self.with_preloads
     includes(
@@ -33,8 +32,8 @@ class Comment < ActiveRecord::Base
     )
   end
 
-  def self.destroy_spam_or_deleted_older_than_30_days(limit: nil, dry_run: false)
-    scope = purgeable_spam_or_deleted
+  def self.destroy_deleted_older_than_30_days(limit: nil, dry_run: false)
+    scope = destroyable
     scope = scope.limit(limit) if limit
     return scope.count if dry_run
 
@@ -63,6 +62,7 @@ class Comment < ActiveRecord::Base
 
   before_create :disallow_dupes, :set_user
   after_create :increment_counters
+  after_destroy :decrement_counters
 
   before_save :truncate_user_agent
 
@@ -122,6 +122,47 @@ class Comment < ActiveRecord::Base
       User.increment_counter(:comments_count, commentable.user, touch: true)
       Asset.increment_counter(:comments_count, commentable, touch: true)
     end
+  end
+
+  # update_all-based soft-delete/restore cascades bypass the destroy callback,
+  # so commands adjust the cached counts in bulk through this.
+  def self.adjust_cached_comment_counts(scope, sign)
+    countable = scope.where(is_spam: false, commentable_type: 'Asset')
+    apply_cached_count_delta(Asset, countable.group(:commentable_id).count, sign)
+    apply_cached_count_delta(User, countable.group(:user_id).count, sign)
+  end
+
+  def self.apply_cached_count_delta(model, counts_by_id, sign)
+    counts_by_id.reject { |id, _| id.nil? }.group_by { |_id, n| n }.each do |n, pairs|
+      model.update_counters(pairs.map(&:first), comments_count: sign * n, touch: true)
+    end
+  end
+  private_class_method :apply_cached_count_delta
+
+  # Repairs historical drift by rebuilding comments_count from the live
+  # (non-spam, non-deleted) comments. Counters were incremented on create but
+  # never decremented on delete until 2026-06.
+  def self.recompute_cached_counts!
+    recompute_cached_count(Asset, :commentable_id)
+    recompute_cached_count(User, :user_id)
+  end
+
+  def self.recompute_cached_count(model, key)
+    true_counts = where(is_spam: false, commentable_type: 'Asset').group(key).count.reject { |id, _| id.nil? }
+    model.with_deleted.where.not(comments_count: 0).update_all(comments_count: 0)
+    true_counts.group_by { |_id, n| n }.each do |n, pairs|
+      model.with_deleted.where(id: pairs.map(&:first)).update_all(comments_count: n)
+    end
+  end
+  private_class_method :recompute_cached_count
+
+  # Already-soft-deleted comments had their counts dropped at soft-delete time;
+  # only decrement when destroying one that's still live and counted.
+  def decrement_counters
+    return if is_spam? || soft_deleted? || commentable_type != 'Asset'
+
+    User.decrement_counter(:comments_count, user_id, touch: true) if user_id
+    Asset.decrement_counter(:comments_count, commentable_id, touch: true)
   end
 
   def is_deliverable?
@@ -185,5 +226,4 @@ end
 #  index_comments_on_commentable_type_and_is_spam_and_private  (commentable_type,is_spam,private)
 #  index_comments_on_commenter_id                              (commenter_id)
 #  index_comments_on_deleted_at_and_created_at                 (deleted_at,created_at)
-#  index_comments_on_is_spam_and_updated_at                    (is_spam,updated_at)
 #

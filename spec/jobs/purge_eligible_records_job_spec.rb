@@ -35,15 +35,6 @@ RSpec.describe PurgeEligibleRecordsJob do
     expect(User.with_deleted.exists?(user.id)).to be(true)
   end
 
-  it 'permanently destroys spam comments older than 30 days' do
-    comment = Comment.create!(commentable: assets(:valid_mp3), commenter: users(:arthur), body: 'old spam',
-      is_spam: true, updated_at: 40.days.ago)
-
-    described_class.new.perform(users: false, assets: false)
-
-    expect(Comment.with_deleted.exists?(comment.id)).to be(false)
-  end
-
   it 'permanently destroys soft-deleted comments older than 30 days' do
     comment = comments(:public_comment_on_asset_by_user)
     comment.update_columns(deleted_at: 40.days.ago)
@@ -53,21 +44,27 @@ RSpec.describe PurgeEligibleRecordsJob do
     expect(Comment.with_deleted.exists?(comment.id)).to be(false)
   end
 
-  it 'leaves recent spam and recently soft-deleted comments alone' do
-    spam = Comment.create!(commentable: assets(:valid_mp3), commenter: users(:arthur), body: 'recent spam',
-      is_spam: true)
+  it 'leaves spam comments that were never soft-deleted alone' do
+    comment = Comment.create!(commentable: assets(:valid_mp3), commenter: users(:arthur), body: 'old spam',
+      is_spam: true, updated_at: 40.days.ago)
+
+    described_class.new.perform(users: false, assets: false)
+
+    expect(Comment.with_deleted.exists?(comment.id)).to be(true)
+  end
+
+  it 'leaves recently soft-deleted comments alone' do
     deleted = comments(:public_comment_on_asset_by_user)
     deleted.update_columns(deleted_at: 5.days.ago)
 
     described_class.new.perform(users: false, assets: false)
 
-    expect(Comment.with_deleted.exists?(spam.id)).to be(true)
     expect(Comment.with_deleted.exists?(deleted.id)).to be(true)
   end
 
   it 'can skip comment purging' do
-    comment = Comment.create!(commentable: assets(:valid_mp3), commenter: users(:arthur), body: 'old spam',
-      is_spam: true, updated_at: 40.days.ago)
+    comment = comments(:public_comment_on_asset_by_user)
+    comment.update_columns(deleted_at: 40.days.ago)
 
     described_class.new.perform(users: false, assets: false, comments: false)
 
@@ -77,8 +74,8 @@ RSpec.describe PurgeEligibleRecordsJob do
   it 'can dry-run without deleting eligible records' do
     user = users(:deleted_30_days_ago)
     asset = assets(:spam_track)
-    comment = Comment.create!(commentable: assets(:valid_mp3), commenter: users(:arthur), body: 'old spam',
-      is_spam: true, updated_at: 40.days.ago)
+    comment = comments(:public_comment_on_asset_by_user)
+    comment.update_columns(deleted_at: 40.days.ago)
 
     described_class.new.perform(dry_run: true)
 

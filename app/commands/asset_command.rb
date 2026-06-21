@@ -10,6 +10,7 @@ class AssetCommand
     time = Time.now
     # first update playlists
     asset.playlists.update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now]) unless asset.playlists.empty?
+    Comment.adjust_cached_comment_counts(asset.comments, -1)
     asset.comments.update_all(deleted_at: time)
     asset.tracks.update_all(deleted_at: time)
     asset.listens.update_all(deleted_at: time)
@@ -25,6 +26,7 @@ class AssetCommand
     asset.user.increment!(:assets_count, touch: true)
     asset.user.refresh_last_uploaded_at!
     asset.playlists.with_deleted.update_all(['tracks_count = tracks_count + 1, playlists.updated_at = ?', Time.now]) unless asset.playlists.with_deleted.empty?
+    Comment.adjust_cached_comment_counts(asset.comments.with_deleted, 1)
     asset.comments.with_deleted.update_all(deleted_at: nil)
     asset.tracks.with_deleted.update_all(deleted_at: nil)
     asset.listens.with_deleted.update_all(deleted_at: nil)

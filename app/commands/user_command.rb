@@ -36,6 +36,7 @@ class UserCommand
   private
 
   def efficiently_delete_relations(time = Time.now)
+    Comment.adjust_cached_comment_counts(comments_touching_user, -1)
     Listen.where(track_owner_id: user.id).update_all(deleted_at: time)
     Listen.where(listener_id: user.id).update_all(deleted_at: time)
     Playlist.joins(:assets).where(assets: { user_id: user.id })
@@ -63,8 +64,13 @@ class UserCommand
     Track.with_deleted.where(user_id: user.id).update_all(deleted_at: nil)
     Playlist.with_deleted.where(user_id: user.id).update_all(deleted_at: nil)
 
+    Comment.adjust_cached_comment_counts(comments_touching_user.with_deleted, 1)
     Comment.with_deleted.where(commenter_id: user.id).update_all(deleted_at: nil)
     Comment.with_deleted.where(user_id: user.id).update_all(deleted_at: nil)
+  end
+
+  def comments_touching_user
+    Comment.where('comments.commenter_id = :id OR comments.user_id = :id', id: user.id)
   end
 
   # with_deleted everywhere: by the time a user is perma-deleted, the soft-delete

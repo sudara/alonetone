@@ -14,13 +14,13 @@ RSpec.describe Admin::DevopsController, type: :request do
     it 'lists the records eligible for permanent deletion' do
       users(:arthur).update_columns(deleted_at: 40.days.ago)
       assets(:valid_mp3).update_columns(deleted_at: 40.days.ago)
-      comment = Comment.create!(commentable: assets(:valid_mp3), commenter: users(:arthur), body: 'old spam',
-        is_spam: true, updated_at: 40.days.ago)
+      comment = comments(:public_comment_on_asset_by_user)
+      comment.update_columns(deleted_at: 40.days.ago)
       get admin_devops_path
       expect(response.body).to include(users(:arthur).login)
       expect(response.body).to include(assets(:valid_mp3).title)
       expect(response.body).to include(comment.body)
-      expect(response.body).to include('spam or deleted comments')
+      expect(response.body).to include('comments soft-deleted more than 30 days ago')
     end
 
     it 'queues the purge sweep' do

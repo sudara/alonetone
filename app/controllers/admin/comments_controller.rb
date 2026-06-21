@@ -4,20 +4,16 @@ module Admin
 
     def index
       @admin_title = 'Comments'
-      scope = Comment.includes(:commenter).recent
-      scope = scope.where(permitted_params[:filter_by]) if permitted_params[:filter_by]
-      @pagy, @comments = pagy(scope)
+      @pagy, @comments = pagy(Comment.filter_by(permitted_params[:filter_by]).includes(:commenter))
     end
 
     def unspam
-      @comment.ham!
-      @comment.update_attribute :is_spam, false
+      CommentCommand.new(@comment).unspam_and_restore
       respond_with_comment_row
     end
 
     def spam
-      @comment.spam!
-      @comment.update_attribute :is_spam, true
+      CommentCommand.new(@comment).spam_and_soft_delete
       respond_with_comment_row
     end
 
@@ -37,7 +33,7 @@ module Admin
     end
 
     def set_comment
-      @comment = Comment.find(params[:id])
+      @comment = Comment.with_deleted.find(params[:id])
     end
   end
 end
