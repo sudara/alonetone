@@ -147,6 +147,23 @@ RSpec.describe CommentsController, type: :request do
       expect(response.body).to include("Recent Comments")
     end
 
+    it "renders a user's comments index when a commented-on track was soft-deleted" do
+      assets(:valid_mp3).soft_delete
+
+      get user_comments_path('sudara')
+
+      expect(response).to be_successful
+    end
+
+    it "renders the index with comment controls when an authorized viewer's commented-on track was soft-deleted" do
+      create_user_session(users(:sudara))
+      assets(:valid_mp3).soft_delete
+
+      get user_comments_path('sudara')
+
+      expect(response).to be_successful
+    end
+
     it "allows a guest to comment on a track" do
       expect do
         post "/comments", params: params, headers: { 'X-Requested-With' => 'XMLHttpRequest' }

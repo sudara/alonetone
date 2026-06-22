@@ -1,6 +1,6 @@
 <% if should_display_track_with_comment? %>
   <%= render(partial: 'assets/asset', layout: 'assets/normal_playback',
-    locals: { asset: comment.commentable }) if comment.commentable_type == "Asset" %>
+    locals: { asset: comment.commentable }) if comment.commentable_type == "Asset" && comment.commentable %>
 <% end %>
 
 <%= tag.div id: dom_id(comment), class: "comment" do %>
@@ -29,10 +29,12 @@
 
 		<% if authorized_for_comment(comment) -%>
 			<div class="comment_controls">
-					<% if comment.is_spam? %>
-						<%= link_to 'un-spam', unspam_user_track_comment_path(comment.commentable.user, comment.commentable, comment),  data: { turbo_method: :put, turbo_confirm: 'This will make the comment public. Are you sure?'} %>
-					<% else %>
-						<%= link_to 'mark as spam', spam_user_track_comment_path(comment.commentable.user, comment.commentable, comment),  data: { turbo_method: :put, turbo_confirm: 'Are you sure you want to mark this as SPAM? This will make it harder for the user who posted this comment to post again'}%>
+					<% if comment.commentable %>
+						<% if comment.is_spam? %>
+							<%= link_to 'un-spam', unspam_user_track_comment_path(comment.commentable.user, comment.commentable, comment),  data: { turbo_method: :put, turbo_confirm: 'This will make the comment public. Are you sure?'} %>
+						<% else %>
+							<%= link_to 'mark as spam', spam_user_track_comment_path(comment.commentable.user, comment.commentable, comment),  data: { turbo_method: :put, turbo_confirm: 'Are you sure you want to mark this as SPAM? This will make it harder for the user who posted this comment to post again'}%>
+						<% end %>
 					<% end %>
 				<%= link_to 'delete', comment_path(comment), data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete this comment?'} %>
 			</div>
