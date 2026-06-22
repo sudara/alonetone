@@ -253,6 +253,11 @@ RSpec.describe AssetsController, type: :request do
         expect(response).to have_http_status(:not_found)
       end
     end
+
+    it "ignores a non-numeric items param instead of raising" do
+      get "/radio/latest/c99"
+      expect(response).to be_successful
+    end
   end
 
   context "#show.mp3" do
