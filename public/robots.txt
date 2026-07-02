@@ -109,3 +109,5 @@ Disallow: /
 User-agent: *
 Disallow: /*.mp3$
 Disallow: /*.MP3$
+# No indexable content, and crawlers pound it — keep everyone off the login page.
+Disallow: /login
