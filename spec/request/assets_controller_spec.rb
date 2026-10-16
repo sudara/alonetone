@@ -463,6 +463,55 @@ RSpec.describe AssetsController, type: :request do
       expect(response).to redirect_to('/arthur/tracks/emptytags/edit')
     end
 
+    context 'when Akismet flags the upload as spam' do
+      before { akismet_stub_response_spam }
+
+      it 'soft-deletes the upload without sending the uploader to a deleted-track 404' do
+        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('muppets.mp3', 'audio/mpeg')] }
+
+        expect(response).to redirect_to(user_tracks_path('arthur'))
+        follow_redirect!
+        expect(response).to be_successful
+        expect(response.body).not_to include('recently deleted that track')
+
+        asset = Asset.with_deleted.where(user: user).order(:id).last
+        expect(asset.is_spam?).to be(true)
+        expect(asset.deleted_at).to be_present
+      end
+
+      it 'does not notify followers about a spam upload' do
+        users(:sudara).add_or_remove_followee(user.id)
+
+        expect {
+          post '/arthur/tracks', params: { asset_data: [fixture_file_upload('muppets.mp3', 'audio/mpeg')] }
+        }.not_to have_enqueued_job(AssetNotificationJob)
+      end
+    end
+
+    it 'keeps the clean track, soft-deletes the spam one, and notifies followers only about the survivor' do
+      allow_any_instance_of(Asset).to receive(:spam?) { |asset| asset.permalink == 'old-muppet-men-booing' }
+      follower = users(:sudara)
+      follower.add_or_remove_followee(user.id)
+
+      expect {
+        post '/arthur/tracks', params: {
+          asset_data: [
+            fixture_file_upload('muppets.mp3', 'audio/mpeg'),
+            fixture_file_upload('emptytags.mp3', 'audio/mpeg')
+          ]
+        }
+      }.to have_enqueued_job(AssetNotificationJob).exactly(:once)
+
+      spam_asset = Asset.with_deleted.find_by(user: user, permalink: 'old-muppet-men-booing')
+      clean_asset = Asset.find_by(user: user, permalink: 'emptytags')
+
+      expect(spam_asset.is_spam?).to be(true)
+      expect(spam_asset.deleted_at).to be_present
+      expect(clean_asset.deleted_at).to be_nil
+      expect(response).to redirect_to(edit_user_track_path('arthur', clean_asset))
+      expect(AssetNotificationJob).to have_been_enqueued.with(asset_ids: [clean_asset.id], user_id: follower.id)
+    end
+
     it 'should accept an uploaded mp3 from chrome with audio/mp3 content type' do
       expect {
         post '/arthur/tracks', params: { asset_data: [fixture_file_upload('muppets.mp3', 'audio/mp3')] }

@@ -117,31 +117,37 @@ class AssetsController < ApplicationController
     @playlists = playlists
 
     flashes = ""
-    at_least_one_upload = false
+    live_assets = []
 
     @assets.each do |asset|
-      if !asset.new_record?
-        flashes += "#{CGI.escapeHTML asset.mp3_file_name} uploaded successfully!<br/>"
-        AssetCommand.new(asset).mark_spam_and_soft_delete if asset.spam? # makes an api call
-        at_least_one_upload = true
-      else
+      if asset.new_record?
         flashes += "'#{CGI.escapeHTML asset.mp3_file_name}' failed to upload. Please double check that it's an Mp3.<br/>"
+        next
+      end
+
+      flashes += "#{CGI.escapeHTML asset.mp3_file_name} uploaded successfully!<br/>"
+      if asset.spam? # makes an api call
+        AssetCommand.new(asset).mark_spam_and_soft_delete
+      else
+        live_assets << asset
       end
     end
 
     if @playlist
       flash[:ok] = "#{flashes}<br/>You had ID3 tags in place so we created an album for you".html_safe
       redirect_to edit_user_playlist_path(@user, @playlist)
-    elsif @assets.present? && at_least_one_upload
-      @user.followers.includes(:settings).where('settings.email_new_tracks = ?', true).pluck(:id).each do |follower_id|
-        AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: @assets.map(&:id), user_id: follower_id)
-      end
-      if @assets.count == 1
-        redirect_to edit_user_track_path(current_user, @assets.first)
+    elsif live_assets.present?
+      notify_followers_of(live_assets)
+      if live_assets.count == 1
+        redirect_to edit_user_track_path(current_user, live_assets.first)
       else
         flash[:ok] = "#{flashes}<br/>Check the title and add a description for your tracks".html_safe
-        redirect_to mass_edit_user_tracks_path(current_user, assets: @assets.collect(&:id))
+        redirect_to mass_edit_user_tracks_path(current_user, assets: live_assets.collect(&:id))
       end
+    elsif @assets.present?
+      # Everything we got was soft-deleted as spam. Don't tip off the uploader.
+      flash[:ok] = flashes.html_safe
+      redirect_to user_tracks_path(current_user)
     else
       flash[:error] = "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload."
       redirect_to new_user_track_path(current_user)
@@ -187,6 +193,12 @@ class AssetsController < ApplicationController
   end
 
   protected
+
+  def notify_followers_of(assets)
+    @user.followers.includes(:settings).where('settings.email_new_tracks = ?', true).pluck(:id).each do |follower_id|
+      AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: assets.map(&:id), user_id: follower_id)
+    end
+  end
 
   def asset_params
     params.require(:asset).permit(
