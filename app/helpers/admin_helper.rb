@@ -26,6 +26,11 @@ module AdminHelper
     item[:controllers].include?(controller_path)
   end
 
+  def admin_section_title
+    item = admin_nav_groups.flat_map { |group| group[:items] }.find { |nav_item| admin_nav_current?(nav_item) }
+    item ? item[:label] : controller_name.titleize
+  end
+
   def admin_chart_options
     {
       colors: ["#eb7b0c"],
