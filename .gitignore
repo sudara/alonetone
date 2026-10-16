@@ -49,3 +49,6 @@ yarn-debug.log*
 
 # project-management notes stay local
 /docs/admin-*
+
+# local MCP server config (may hold keys)
+.mcp.json
