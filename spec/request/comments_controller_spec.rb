@@ -123,6 +123,17 @@ RSpec.describe CommentsController, type: :request do
       end.not_to change(Comment, :count)
       expect(response).not_to be_successful
     end
+
+    it "rejects a comment from a banned IP range without asking Akismet" do
+      BannedIp.create!(ip: '8.8.0.0/16')
+      BannedIp.clear_cache
+      params = { :comment => { "body" => "Comment", "private" => "0", "commentable_type" => "Asset", "commentable_id" => asset.id }, "track_id" => asset.permalink }
+      expect_any_instance_of(Comment).not_to receive(:spam?)
+      expect do
+        post "/comments", params: params, headers: { 'x-forwarded-for' => '8.8.4.4', 'user-agent' => 'webkit' }
+      end.not_to change { Comment.with_deleted.count }
+      expect(response).to have_http_status(:unprocessable_content)
+    end
   end
 
   context "basics" do

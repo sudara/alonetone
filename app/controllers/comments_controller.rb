@@ -4,6 +4,8 @@ class CommentsController < ApplicationController
   before_action :require_login, only: %i[destroy unspam spam]
 
   def create
+    return head(:unprocessable_content) if is_from_a_bad_ip?
+
     @comment = Comment.new(massaged_params)
     @comment.is_spam = @comment.spam? # makes api request
     @comment.spam_if_banned_words! # immediate flag based on terms
