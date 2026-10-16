@@ -134,6 +134,36 @@ RSpec.describe CommentsController, type: :request do
       end.not_to change { Comment.with_deleted.count }
       expect(response).to have_http_status(:unprocessable_content)
     end
+
+    it "rejects a comment with a commentable_type other than Asset" do
+      params = { :comment => { "body" => "Comment", "private" => "0", "commentable_type" => "Asset').(abcd", "commentable_id" => asset.id }, "track_id" => asset.permalink }
+      expect do
+        post "/comments", params: params, headers: { 'x-forwarded-for' => '8.8.8.8', 'user-agent' => 'webkit' }
+      end.not_to change { Comment.with_deleted.count }
+      expect(response).to have_http_status(:unprocessable_content)
+    end
+
+    context "with forgery protection on" do
+      before { allow_any_instance_of(ActionController::Base).to receive(:protect_against_forgery?).and_return(true) }
+
+      let(:params) { { :comment => { "body" => "Comment", "private" => "0", "commentable_type" => "Asset", "commentable_id" => asset.id }, "track_id" => asset.permalink } }
+
+      it "rejects a guest comment without a valid CSRF token" do
+        expect do
+          post "/comments", params: params, headers: { 'x-forwarded-for' => '8.8.8.8', 'user-agent' => 'webkit' }
+        end.not_to change { Comment.with_deleted.count }
+        expect(response).to have_http_status(:unprocessable_content)
+      end
+
+      it "accepts a guest comment with a valid CSRF token" do
+        get user_track_path(users(:sudara), asset)
+        token = Nokogiri::HTML(response.body).at_css('meta[name="csrf-token"]')['content']
+        expect do
+          post "/comments", params: params, headers: { 'x-forwarded-for' => '8.8.8.8', 'user-agent' => 'webkit', 'X-CSRF-Token' => token }
+        end.to change(Comment, :count).by(1)
+        expect(response).to have_http_status(201)
+      end
+    end
   end
 
   context "basics" do

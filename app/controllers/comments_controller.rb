@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   before_action :require_login, only: %i[destroy unspam spam]
 
   def create
-    return head(:unprocessable_content) if is_from_a_bad_ip?
+    return head(:unprocessable_content) if is_from_a_bad_ip? || !trusted_submission?
 
     @comment = Comment.new(massaged_params)
     @comment.is_spam = @comment.spam? # makes api request
@@ -74,6 +74,11 @@ class CommentsController < ApplicationController
 
   def user_owns_commentable?
     @comment.commentable.user.id == current_user.id
+  end
+
+  # The app-wide null_session forgery strategy lets a token-less guest post through as a guest.
+  def trusted_submission?
+    comment_params[:commentable_type] == 'Asset' && (logged_in? || verified_request?)
   end
 
   def massaged_params
