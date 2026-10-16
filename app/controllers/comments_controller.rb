@@ -76,9 +76,9 @@ class CommentsController < ApplicationController
     @comment.commentable.user.id == current_user.id
   end
 
-  # The app-wide null_session forgery strategy lets a token-less guest post through as a guest.
+  # The app-wide null_session forgery strategy lets a token-less request post as an anonymous guest.
   def trusted_submission?
-    comment_params[:commentable_type] == 'Asset' && (logged_in? || verified_request?)
+    comment_params[:commentable_type] == 'Asset' && verified_request?
   end
 
   def massaged_params

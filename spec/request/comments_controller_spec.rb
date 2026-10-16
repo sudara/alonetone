@@ -164,6 +164,31 @@ RSpec.describe CommentsController, type: :request do
         expect(response).to have_http_status(201)
       end
     end
+
+    context "with forgery protection on and a logged-in user" do
+      before do
+        create_user_session(users(:arthur))
+        allow_any_instance_of(ActionController::Base).to receive(:protect_against_forgery?).and_return(true)
+      end
+
+      let(:params) { { :comment => { "body" => "Comment", "private" => "0", "commentable_type" => "Asset", "commentable_id" => asset.id }, "track_id" => asset.permalink } }
+
+      it "rejects a comment without a valid CSRF token instead of posting it as a guest" do
+        expect do
+          post "/comments", params: params, headers: { 'user-agent' => 'webkit' }
+        end.not_to change { Comment.with_deleted.count }
+        expect(response).to have_http_status(:unprocessable_content)
+      end
+
+      it "accepts a comment with a valid CSRF token and credits the user" do
+        get user_track_path(users(:sudara), asset)
+        token = Nokogiri::HTML(response.body).at_css('meta[name="csrf-token"]')['content']
+        expect do
+          post "/comments", params: params, headers: { 'user-agent' => 'webkit', 'X-CSRF-Token' => token }
+        end.to change(Comment, :count).by(1)
+        expect(Comment.last.commenter).to eq(users(:arthur))
+      end
+    end
   end
 
   context "basics" do
