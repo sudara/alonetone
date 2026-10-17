@@ -144,7 +144,8 @@ RSpec.describe CommentsController, type: :request do
     end
 
     context "with forgery protection on" do
-      before { allow_any_instance_of(ActionController::Base).to receive(:protect_against_forgery?).and_return(true) }
+      before { ActionController::Base.allow_forgery_protection = true }
+      after { ActionController::Base.allow_forgery_protection = false }
 
       let(:params) { { :comment => { "body" => "Comment", "private" => "0", "commentable_type" => "Asset", "commentable_id" => asset.id }, "track_id" => asset.permalink } }
 
@@ -168,8 +169,10 @@ RSpec.describe CommentsController, type: :request do
     context "with forgery protection on and a logged-in user" do
       before do
         create_user_session(users(:arthur))
-        allow_any_instance_of(ActionController::Base).to receive(:protect_against_forgery?).and_return(true)
+        ActionController::Base.allow_forgery_protection = true
       end
+
+      after { ActionController::Base.allow_forgery_protection = false }
 
       let(:params) { { :comment => { "body" => "Comment", "private" => "0", "commentable_type" => "Asset", "commentable_id" => asset.id }, "track_id" => asset.permalink } }
 
