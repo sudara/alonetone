@@ -4,6 +4,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# A new Rails minor needs a load_defaults pass, so we move to it on purpose
 gem 'rails', '~> 8.1.3'
 gem 'mysql2'
 gem 'puma'
@@ -34,6 +35,7 @@ gem 'nokogiri'
 gem 'commonmarker'
 gem 'country_select'
 gem 'local_time'
+# Pagy majors rewrite the API and our initializer patches its internals
 gem 'pagy', '~> 43.5'
 
 # external services
