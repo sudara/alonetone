@@ -19,7 +19,8 @@ WebMock.disable_net_connect!(
     'ownandship.io',
     'cdn.alonetone.com', # fonts
     'github.com',
-    'github-releases.githubusercontent.com'])
+    'github-releases.githubusercontent.com']
+)
 
 # Reloads schema.rb when database has pending migrations.
 ActiveRecord::Migration.maintain_test_schema!
@@ -109,12 +110,13 @@ RSpec.configure do |config|
     messages = @browser_console_messages
     page.driver.with_playwright_page do |pw_page|
       pw_page.on('console', ->(msg) { messages << { level: msg.type, message: msg.text } })
-      pw_page.on('pageerror', ->(err) { messages << { level: 'error', message: err.message } })
+      pw_page.on('pageerror', ->(err) { messages << { level: 'error', message: "#{err.name}: #{err.message}" } })
     end
   end
 
   config.after(:each, type: :feature, js: true) do |test|
     next if test.metadata[:allow_js_errors]
+
     aggregate_failures 'javascript errors' do
       @browser_console_messages.each do |entry|
         # Expected: validation responses for forms and Chrome's auto-logged HTTP errors are not JS errors.
@@ -126,8 +128,9 @@ RSpec.configure do |config|
 
         expect(entry[:level]).not_to eq('error'), entry[:message]
         next unless entry[:level] == 'warning'
-        STDERR.puts 'WARN: javascript warning'
-        STDERR.puts entry[:message]
+
+        warn 'WARN: javascript warning'
+        warn entry[:message]
       end
     end
   end
