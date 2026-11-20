@@ -26,6 +26,8 @@ jobs:
     - name: Installing apt dependencies
       run: |
         sudo add-apt-repository ppa:chris-needham/ppa
+        # Launchpad lists an empty amd64v3 index for this PPA (LP#2127888), so point apt at the amd64 one
+        sudo sed -i '/^URIs:.*chris-needham/a Architectures: amd64' /etc/apt/sources.list.d/*.sources
         sudo apt-get update
         sudo apt-get install libvips libvips-dev audiowaveform rustc # libexpat1-dev gettext libglib2.0-dev liborc-0.4-dev libfftw3-dev liblcms2-dev libmagickwand-dev libopenexr-dev libcfitsio-dev libgif-dev libgsf-1-dev libmatio-dev libopenslide-dev libpango1.0-dev libpoppler-glib-dev librsvg2-dev libwebp-dev
         vips --version
