@@ -4,8 +4,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-# A new Rails minor needs a load_defaults pass, so we move to it on purpose
-gem 'rails', '~> 8.1.3'
+gem 'rails'
 gem 'mysql2'
 gem 'puma'
 gem 'puma_worker_killer'
