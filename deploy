@@ -205,7 +205,8 @@ ssh alonetone 'bash -s' -- "$FORCE_BUNDLE" "$FORCE_MIGRATE" <<'REMOTE_SCRIPT'
     else
       echo "Full restart was forced by deploy argument."
     fi
-    "${BUNDLE_COMMAND[@]}" exec pumactl restart
+    # pumactl restart re-execs the Ruby and Puma paths the old master booted from, so stop and start for real.
+    sudo systemctl restart puma-alonetone
   else
     echo "Run puma, run! (phased restart)"
     "${BUNDLE_COMMAND[@]}" exec pumactl phased-restart
